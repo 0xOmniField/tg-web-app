@@ -6,11 +6,13 @@ import {
 } from "./accountSlice";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
+import "./index.css";
+import PlayButton from "../Buttons/PlayButton";
 
 const Account: React.FC = () => {
   const account = useAccount();
   const dispatch = useAppDispatch();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect, status } = useConnect();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const [l2Address, setL2Address] = useState("");
@@ -48,17 +50,27 @@ const Account: React.FC = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          if (l1account !== undefined) {
-            dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
-          } else {
-            console.error("L1AccountInfo is undefined");
-          }
-        }}
-      >
-        play
-      </button>
+      {account.status === "disconnected" ? (
+        <PlayButton onClick={connectWallet} />
+      ) : (
+        // : chain?.unsupported ? (
+        //   <PlayButton
+        //     text={"Wrong network"}
+        //     onClick={() => {
+        //     }}
+        //   />
+        // )
+        <PlayButton
+          onClick={() => {
+            if (l1account !== undefined) {
+              dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
+            } else {
+              console.error("L1AccountInfo is undefined");
+            }
+          }}
+        />
+      )}
+      {/* {<PlayButton text={"Wrong network"} onClick={openChainModal} />} */}
       {/* <div>
         <h2>Account</h2>
         <div>

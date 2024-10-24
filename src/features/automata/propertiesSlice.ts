@@ -88,7 +88,6 @@ export const selectUIState = (state: RootState) =>
 export const selectGlobalTimer = (state: RootState) =>
   state.automata.properties.globalTimer;
 export const selectNonce = (state: RootState) => {
-  console.log(99999, state);
   return BigInt(state.automata.properties.nonce);
 };
 

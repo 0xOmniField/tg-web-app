@@ -19,8 +19,8 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use(
   async (response) => {
     let result; // 默认值
-    if (response.data.code === 200) {
-      result = Promise.resolve(response.data.data);
+    if (response.data.success) {
+      result = Promise.resolve(response);
     } else {
       result = Promise.reject(response);
     }

@@ -5,18 +5,18 @@ export interface L1AccountInfo {
   address: string;
   chainId: string;
 }
-export interface L2AccountInfo {
-  address: string;
-}
-// export class L2AccountInfo {
+// export interface L2AccountInfo {
 //   address: string;
-//   constructor(address0x: string) {
-//     this.address = address0x.substring(2);
-//   }
-//   toBigInt(): bigint {
-//     return BigInt("0x" + this.address);
-//   }
 // }
+export class L2AccountInfo {
+  address: string;
+  constructor(address0x: string) {
+    this.address = address0x.substring(2);
+  }
+  toBigInt(): bigint {
+    return BigInt("0x" + this.address);
+  }
+}
 
 // async function loginL1Account() {
 //   return await withBrowserConnector(async (web3: DelphinusBrowserConnector) => {
@@ -31,10 +31,11 @@ export interface L2AccountInfo {
 async function loginL2Account(
   address: string,
   signMessage: SignMessageMutateAsync<unknown>
-): Promise<L2AccountInfo> {
+): Promise<{ address: string }> {
   const str: string = await signMessage({ message: address });
   console.log("signed result", str);
-  return { address: str.substring(0, 34) };
+  const l2account = new L2AccountInfo(str.substring(0, 34));
+  return { address: l2account.address };
 }
 
 export interface AccountState {

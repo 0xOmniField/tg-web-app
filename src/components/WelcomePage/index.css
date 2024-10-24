@@ -1,0 +1,39 @@
+body,
+html,
+#root {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+.welcome-page-container {
+  height: 100vh;
+  width: 100vw;
+  background: url("@assets/backgrounds/welcome.gif") no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.welcome-page-background {
+  height: 100%;
+  width: 100%;
+  background-image: url("@assets/backgrounds/welcome.gif");
+  background-size: contain;
+}
+
+.welcome-page-background-filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.welcome-page-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

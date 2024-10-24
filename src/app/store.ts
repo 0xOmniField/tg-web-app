@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/gamePlay/gamePlaySlice";
-import accountReducer from "../features/account/accountSlice";
+import accountReducer from "../components/Account/accountSlice";
 import automataReducer from "../features/automata/automata";
 
 export const store = configureStore({
