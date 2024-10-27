@@ -1,0 +1,39 @@
+.diff-resource-display-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.diff-resource-display-image {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 28%;
+    height: 60%;
+}
+
+.diff-resource-display-positive-text, .diff-resource-display-zero-text, .diff-resource-display-negative-text {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    font-size: 8px;
+    text-align: right;
+    line-height: 8px;
+    margin: 0px;
+    width: 60%;
+    height: 8px;
+    font-family: "mishmash";
+}
+
+.diff-resource-display-positive-text {
+    color: rgb(85, 221, 85);
+}
+
+.diff-resource-display-zero-text{
+    color: white;
+}
+
+.diff-resource-display-negative-text {
+    color: rgb(220, 36, 36);
+}

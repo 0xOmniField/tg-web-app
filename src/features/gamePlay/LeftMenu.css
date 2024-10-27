@@ -1,0 +1,79 @@
+.main-wrapper {
+  height: 100%;
+  position: relative;
+  background-image: url("@assets/games/backgrounds/side_frame_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+}
+.new_left_top {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 117px;
+  height: 37px;
+  background-image: url("@assets/games/backgrounds/side_top_bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.left-top,
+.left-middle,
+.left-bottom {
+  width: 190px;
+  background-size: contain;
+}
+
+.left-top {
+  height: 190px;
+  background-image: url("@assets/games/backgrounds/left_top.png");
+  background-repeat: no-repeat;
+}
+
+.left-middle {
+  flex-grow: 1;
+  background-image: url("@assets/games/backgrounds/left_mid.png");
+  background-repeat: repeat-y;
+}
+
+.left-bottom {
+  height: 190px;
+  background-image: url("@assets/games/backgrounds/left_bottom.png");
+  background-repeat: no-repeat;
+}
+
+.left-creature-grid {
+  height: calc(100% - 110px);
+  background-image: url("@assets/games/backgrounds/side_inside_bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.left-creature-page-selector {
+  position: absolute;
+  width: 134px;
+  height: 25px;
+  bottom: 17px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left-corner-bar {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 0px;
+  right: -2px;
+}
+
+.left-middle-bar {
+  position: absolute;
+  width: 32px;
+  height: 125px;
+  top: 50%;
+  right: -20px;
+  /* transform: translate(-50%, -50%); */
+}

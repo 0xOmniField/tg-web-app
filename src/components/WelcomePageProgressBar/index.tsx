@@ -1,5 +1,5 @@
-import background from "@assets/backgrounds/bg_1.png";
-import frame from "@assets/backgrounds/frame.png";
+import background from "@assets/games/backgrounds/bg_1.png";
+import frame from "@assets/games/backgrounds/frame.png";
 import "./index.css";
 
 interface Props {

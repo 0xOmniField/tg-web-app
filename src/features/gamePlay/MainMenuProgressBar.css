@@ -1,0 +1,156 @@
+.main-progress-bar-container {
+  position: absolute;
+  /* width: 174px;
+    height: 174px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+  width: 86px;
+  height: 86px;
+  top: 48.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.main-progress-bar-background {
+  width: 100%;
+  height: 100%;
+}
+
+.main-progress-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.main-progress-bot-image,
+.main-progress-bot-creating-image,
+.main-progress-bot-creating-animation-image {
+  position: absolute;
+  /* width: 70%;
+  height: 70%; */
+  top: 37%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 32px;
+  height: 53px;
+}
+
+.main-progress-bot-creating-image {
+  filter: brightness(0) contrast(0.7);
+}
+
+@keyframes unlockImageFrames {
+  0% {
+    filter: brightness(0) contrast(0.7);
+  }
+  30% {
+    filter: brightness(0) contrast(0.7);
+  }
+  80% {
+    filter: brightness(1) contrast(1);
+  }
+  100% {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.main-progress-bot-creating-animation-image {
+  animation: unlockImageFrames 1s linear;
+}
+
+.main-progress-bar-program-name-text {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  text-align: center;
+  line-height: 100%;
+  margin: 0px;
+  color: black;
+  width: 70%;
+  height: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  /* font-family: "mishmash"; */
+  pointer-events: none;
+}
+
+.main-progress-bar-program-processing-time-text {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: center;
+  line-height: 100%;
+  margin: 0px;
+  color: black;
+  width: 55%;
+  height: 10px;
+  /* font-family: "mishmash"; */
+  pointer-events: none;
+}
+
+.main-progress-sector {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+@keyframes progressFrames {
+  0% {
+    background-image: url("@assets/games/Animations/Waves/wave1.png");
+  }
+  12.5% {
+    background-image: url("@assets/games/Animations/Waves/wave2.png");
+  }
+  25% {
+    background-image: url("@assets/games/Animations/Waves/wave3.png");
+  }
+  37.5% {
+    background-image: url("@assets/games/Animations/Waves/wave4.png");
+  }
+  50% {
+    background-image: url("@assets/games/Animations/Waves/wave5.png");
+  }
+  62.5% {
+    background-image: url("@assets/games/Animations/Waves/wave6.png");
+  }
+  75% {
+    background-image: url("@assets/games/Animations/Waves/wave7.png");
+  }
+  87.5% {
+    background-image: url("@assets/games/Animations/Waves/wave8.png");
+  }
+  100% {
+    background-image: url("@assets/games/Animations/Waves/wave1.png");
+  }
+}
+
+.main-progress-sector-top {
+  height: 14px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: progressFrames 0.7s steps(4) infinite;
+  background-position: bottom;
+}
+
+.main-progress-sector-repeat {
+  position: absolute;
+  top: 14px;
+  width: 100%;
+  height: round(down, calc(100% - 14px), 1px);
+  background-image: url("@assets/games/MainMenu/progress.png");
+  background-repeat: repeat-Y;
+  background-size: contain;
+}

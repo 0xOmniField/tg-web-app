@@ -1,0 +1,22 @@
+.page-selector-container {
+  width: 134px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-selector-page-number-background {
+  width: 45px;
+  height: 18px;
+}
+
+.page-selector-page-number-text {
+  text-align: center;
+  margin: 0px;
+  color: white;
+  width: 45px;
+  font-size: 12px;
+  color: #3dc9a4;
+  pointer-events: none;
+}

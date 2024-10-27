@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "@app/hooks";
-import { getConfig, sendTransaction, queryState } from "@api/client";
+import {
+  getConfig,
+  sendTransaction,
+  queryState,
+  SERVER_TICK_TO_SECOND,
+} from "@api/client";
 import { getInsPlayerTransactionCommandArray } from "@api/rpc";
 import { useAppSelector } from "@app/hooks";
 import { selectL2Account } from "@src/components/account/accountSlice";
@@ -105,12 +110,17 @@ const Home = () => {
       });
     }
   }, [dispatch, l2account, uIState]);
+  // useEffect(() => {
+  //   dispatch(getConfig());
+  //   dispatch(queryState({ cmd: [], prikey: "" }));
+  // }, []);
 
   return l2account && uIState >= UIState.Idle ? (
     <GamePlay />
   ) : (
     <WelcomePage progress={progress} message={message} />
   );
+  // return <GamePlay />;
 };
 
 export default Home;

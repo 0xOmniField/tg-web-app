@@ -7,7 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
 import "./index.css";
-import PlayButton from "../Buttons/PlayButton";
+import PlayButton from "@components/PlayButton";
 
 const Account: React.FC = () => {
   const account = useAccount();
@@ -28,29 +28,28 @@ const Account: React.FC = () => {
   }, [connect, connectors]);
 
   useEffect(() => {
-    if (account.status === "connected") {
+    if (!account.isConnected) {
+      connectWallet();
+    } else {
       dispatch(
         setL1AllAccount({
           address: account.address,
           chainId: account.chainId,
         })
       );
-    } else if (account.status === "disconnected") {
-      connectWallet();
     }
   }, [
     account.address,
     account.chainId,
-    account.status,
-    connect,
+    account.isConnected,
     connectWallet,
-    connectors,
     dispatch,
   ]);
-
+  const connected =
+    account && account.chainId && account.status === "connected";
   return (
     <>
-      {account.status === "disconnected" ? (
+      {!connected ? (
         <PlayButton onClick={connectWallet} />
       ) : (
         // : chain?.unsupported ? (

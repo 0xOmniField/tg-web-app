@@ -39,7 +39,7 @@
   height: 100%;
   max-width: 100%;
   min-width: 0%;
-  background-image: url("@assets/backgrounds/loading.png");
+  background-image: url("@assets/games/backgrounds/loading.png");
   background-repeat: repeat-x;
 }
 

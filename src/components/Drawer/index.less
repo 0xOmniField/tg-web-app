@@ -1,0 +1,91 @@
+.drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.drawer.right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.drawer.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 250px;
+  transform: translateY(-100%);
+}
+
+.drawer.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 250px;
+  transform: translateY(100%);
+}
+
+.drawer.open.left {
+  transform: translateX(0);
+}
+.drawer.open.right {
+  transform: translateX(0);
+}
+.drawer.open.top {
+  transform: translateY(0);
+}
+.drawer.open.bottom {
+  transform: translateY(0);
+}
+
+.drawer-content {
+  position: relative;
+  height: 100%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.left-button,
+.right-button {
+  width: 28px;
+  height: 28px;
+  background: #14143c;
+  border-radius: 50%;
+  border: 2px solid #4e4e8d;
+  position: absolute;
+  top: 50%;
+}
+.left-button {
+  right: 0;
+  transform: translate(50%, 0);
+}
+.right-button {
+  left: 0;
+  transform: translate(-50%, 0);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
