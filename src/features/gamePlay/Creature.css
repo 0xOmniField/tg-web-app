@@ -52,11 +52,14 @@
   color: #5cffff;
   pointer-events: none;
 }
-
-.creature-lock-image {
+.creature-lock-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
+  background: #222257;
+  width: 85px;
+  height: 93px;
   transform: translate(-50%, -60%);
-  height: 88px;
+}
+.creature-lock-image {
 }

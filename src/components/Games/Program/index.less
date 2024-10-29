@@ -1,9 +1,10 @@
 .program-container {
   position: relative;
-  // width: 145px;
-  // height: 88px;
-  background: #6464c8;
+  background: url("@assets/games/backgrounds/command_card_bg.png") no-repeat;
+  width: 83px;
+  height: 143px;
   padding: 4px;
+  background-size: contain;
 }
 
 .program-name-text {
@@ -29,5 +30,6 @@
   pointer-events: none;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  overflow: scroll;
+  height: 55px;
 }

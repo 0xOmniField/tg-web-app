@@ -1,7 +1,4 @@
 import "./Creature.css";
-// import creatureBackground from "@assets/games/backgrounds/creature_frame.png";
-// import creatureSelectingFrame from "@assets/games/backgrounds/robot_select.png";
-// import creatureLock from "@assets/games/backgrounds/robot_lock.png";
 import creatureBackground from "@assets/games/backgrounds/creature_frame_new.png";
 import creatureSelectingFrame from "@assets/games/backgrounds/robot_select_new.png";
 import creatureLock from "@assets/games/backgrounds/robot_lock_new.png";
@@ -58,7 +55,6 @@ const Creature = ({ index, creature, progress }: Props) => {
       )}
       {creatureIconPath && (
         <>
-          <img src={creatureIconPath} className="creature-image-background" />
           <img
             src={creatureIconPath}
             className="creature-image"
@@ -73,7 +69,11 @@ const Creature = ({ index, creature, progress }: Props) => {
         </>
       )}
       <p className="creature-text">{creature.name}</p>
-      {isLocked && <img src={creatureLock} className="creature-lock-image" />}
+      {isLocked && (
+        <div className="creature-lock-wrapper">
+          <img src={creatureLock} className="creature-lock-image" />
+        </div>
+      )}
     </div>
   );
 };

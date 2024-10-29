@@ -74,17 +74,17 @@ const LeftMenu = ({ localTimer }: Props) => {
       window.removeEventListener("resize", updateCreatureGridHeight);
     };
   }, []);
-  console.log(11111, creatureGridHeight, creaturesBeforePaging, creatures);
+  // console.log(11111, creatureGridHeight, creaturesBeforePaging, creatures);
   return (
     <Drawer
       showButton
       isOpen={isLeftDrawerOpen}
       position="left"
       onVisibleChange={setLeftDrawerOpen}
+      style={{ width: 276 }}
     >
-      <div className="main-wrapper">
+      <div className="menu_bg_left">
         <div className="new_left_top"></div>
-
         <div ref={creatureGridRef} className="left-creature-grid">
           <Grid
             elementWidth={creatureGridElementWidth}

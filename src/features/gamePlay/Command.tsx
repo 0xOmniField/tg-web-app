@@ -73,6 +73,7 @@ const Command: React.FC = () => {
   };
   const enableNextPageButton = currentPage < pageCount - 1;
   const enablePrevPageButton = currentPage > 0;
+  console.log(11111, programsBeforePaging, programs);
 
   return (
     <div className="bottom">
@@ -84,6 +85,9 @@ const Command: React.FC = () => {
         onClick={onClickPrevPageButton}
         style={{
           transform: "rotate(-90deg)",
+          width: "18px",
+          height: "18px",
+          marginLeft: "26px",
         }}
       />
       <div ref={programGridRef} className="right-program-grid">
@@ -106,6 +110,9 @@ const Command: React.FC = () => {
         onClick={onClickNextPageButton}
         style={{
           transform: "rotate(-90deg)",
+          width: "18px",
+          height: "18px",
+          marginRight: "26px",
         }}
       />
     </div>

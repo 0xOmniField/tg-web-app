@@ -12,7 +12,7 @@ interface Props {
 
 const PrevPageButton = ({ isDisabled, onClick, style }: Props) => {
   return (
-    <div className="prev-page-button-scale">
+    <div className="prev-page-button-scale" style={style}>
       <ImageButton
         isDisabled={isDisabled}
         defaultImagePath={upButtonImage}
@@ -20,7 +20,6 @@ const PrevPageButton = ({ isDisabled, onClick, style }: Props) => {
         clickedImagePath={upButtonClickImage}
         disabledImagePath={upButtonClickImage}
         onClick={onClick}
-        style={style}
       />
     </div>
   );

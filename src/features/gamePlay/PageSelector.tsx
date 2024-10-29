@@ -25,6 +25,10 @@ const PageSelector = ({
         <PrevPageButton
           isDisabled={!enablePrevPageButton}
           onClick={onClickPrevPageButton}
+          style={{
+            width: "23px",
+            height: "23px",
+          }}
         />
       </div>
 
@@ -42,6 +46,10 @@ const PageSelector = ({
         <NextPageButton
           isDisabled={!enableNextPageButton}
           onClick={onClickNextPageButton}
+          style={{
+            width: "23px",
+            height: "23px",
+          }}
         />
       </div>
     </div>

@@ -12,7 +12,7 @@ interface Props {
 
 const NextPageButton = ({ isDisabled, onClick, style }: Props) => {
   return (
-    <div className="next-page-button-scale">
+    <div className="next-page-button-scale" style={style}>
       <ImageButton
         isDisabled={isDisabled}
         defaultImagePath={downButtonImage}
@@ -20,7 +20,6 @@ const NextPageButton = ({ isDisabled, onClick, style }: Props) => {
         clickedImagePath={downButtonClickImage}
         disabledImagePath={downButtonClickImage}
         onClick={onClick}
-        style={style}
       />
     </div>
   );

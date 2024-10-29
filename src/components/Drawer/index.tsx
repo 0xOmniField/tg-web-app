@@ -6,16 +6,21 @@ const Drawer = ({
   position = "left",
   children,
   onVisibleChange,
+  style,
 }: {
   isOpen: boolean;
   showButton?: boolean;
   position: string;
   children: JSX.Element;
   onVisibleChange: (isOpen: boolean) => void;
+  style?: React.CSSProperties | undefined;
 }) => {
   return (
     <>
-      <div className={`drawer ${position} ${isOpen ? "open" : ""}`}>
+      <div
+        className={`drawer ${position} ${isOpen ? "open" : ""}`}
+        style={style}
+      >
         {showButton && (
           <div
             className={`${position}-button`}

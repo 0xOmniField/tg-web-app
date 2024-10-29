@@ -21,7 +21,10 @@ const Program = ({ program, onSelect }: Props) => {
           {formatTime(program.processingTime)}
         </p>
       </div>
-      <div className="flex justify-center h-14 items-center">
+      <div
+        className="flex justify-center h-14 items-center mt-1"
+        style={{ background: "#3CC9A3", height: 60 }}
+      >
         <img
           src={getProgramIconPath(program.type)}
           className="program-icon-image"
