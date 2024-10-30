@@ -110,17 +110,16 @@ const Home = () => {
       });
     }
   }, [dispatch, l2account, uIState]);
+  // useEffect(() => {
+  //   dispatch(getConfig());
+  //   dispatch(queryState({ cmd: [], prikey: "" }));
+  // }, []);
 
-  useEffect(() => {
-    dispatch(getConfig());
-    dispatch(queryState({ cmd: [], prikey: "" }));
-  }, []);
-
-  // return l2account && uIState >= UIState.Idle ? (
-  //   <GamePlay />
-  // ) : (
-  //   <WelcomePage progress={progress} message={message} />
-  // );
+  return l2account && uIState >= UIState.Idle ? (
+    <GamePlay />
+  ) : (
+    <WelcomePage progress={progress} message={message} />
+  );
   return <GamePlay />;
 };
 
