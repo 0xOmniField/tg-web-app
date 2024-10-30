@@ -1,5 +1,4 @@
 import "./DiffResourcesInfo.css";
-import infoBackground from "@assets/games/backgrounds/info_frame.png";
 import Grid from "@components/Grid/Grid";
 import DiffResourceDisplay from "./DiffResourceDisplay";
 
@@ -34,11 +33,13 @@ const DiffResourcesInfo = ({ diffResources }: Props) => {
   ];
   return (
     <>
-      <img src={infoBackground} className="main-info-background" />
       <div className="diff-resources-info-grid">
         <Grid
           columnCount={4}
           rowCount={5}
+          style={{
+            padding: "12px",
+          }}
           elements={allResourceTypesWithBlanks.map((type, index) =>
             type != null ? (
               <DiffResourceDisplay

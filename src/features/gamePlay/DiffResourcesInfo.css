@@ -1,8 +1,11 @@
-.diff-resources-info-grid{
-    width: 90%;
-    height: 85%;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
+.diff-resources-info-grid {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 215px;
+  height: 141px;
+  background: url("@assets/games/backgrounds/info_frame.png") no-repeat;
+  background-size: contain;
+  background-color: rgba(20, 20, 60, 0.5);
+  border-radius: 8px;
 }

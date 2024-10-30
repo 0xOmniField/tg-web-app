@@ -1,44 +1,43 @@
 import "./ProgramFilterButton.css";
-import selectingBackground from "@assets/games/backgrounds/tab_select.png";
-import background from "@assets/games/backgrounds/tab.png";
-import allSelectingBackground from "@assets/games/backgrounds/all_tab_select.png";
-import allBackground from "@assets/games/backgrounds/all_tab.png";
+import middleSelectingBackground from "@assets/games/backgrounds/middle_tab_select.png";
+import middleBackground from "@assets/games/backgrounds/middle_tab.png";
+import leftSelectingBackground from "@assets/games/backgrounds/left_tab_select.png";
+import leftBackground from "@assets/games/backgrounds/left_tab.png";
+import rightSelectingBackground from "@assets/games/backgrounds/right_tab_select.png";
+import rightBackground from "@assets/games/backgrounds/right_tab.png";
 
 interface Props {
   isSelected: boolean;
   text?: string | null;
   iconImagePath?: string | null;
   onClick: () => void;
+  position: "left" | "right" | "middle";
 }
-
+const bgMap = {
+  middle: middleBackground,
+  left: leftBackground,
+  right: rightBackground,
+  middleSelecting: middleSelectingBackground,
+  leftSelecting: leftSelectingBackground,
+  rightSelecting: rightSelectingBackground,
+};
 const ProgramFilterButton = ({
   isSelected,
   text = null,
   iconImagePath = null,
+  position,
   onClick,
 }: Props) => {
   return (
     <div className="program-filter-bar-filter-container" onClick={onClick}>
-      {text ? (
+      {isSelected ? (
         <img
-          src={allSelectingBackground}
+          src={bgMap[`${position}Selecting`]}
           className="program-filter-bar-filter-selecting-background"
         />
       ) : (
         <img
-          src={selectingBackground}
-          className="program-filter-bar-filter-selecting-background"
-        />
-      )}
-
-      {isSelected ? null : text ? (
-        <img
-          src={allBackground}
-          className="program-filter-bar-filter-background"
-        />
-      ) : (
-        <img
-          src={background}
+          src={bgMap[`${position}`]}
           className="program-filter-bar-filter-background"
         />
       )}

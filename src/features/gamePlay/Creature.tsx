@@ -1,6 +1,4 @@
-import "./Creature.css";
-import creatureBackground from "@assets/games/backgrounds/creature_frame_new.png";
-import creatureSelectingFrame from "@assets/games/backgrounds/robot_select_new.png";
+import "./Creature.less";
 import creatureLock from "@assets/games/backgrounds/robot_lock_new.png";
 import { UIState, setUIState } from "@features/automata/propertiesSlice";
 import {
@@ -45,16 +43,12 @@ const Creature = ({ index, creature, progress }: Props) => {
   };
 
   return (
-    <div className="creature-container" onClick={() => onSelect()}>
-      <img src={creatureBackground} className="creature-background" />
-      {isSelected && (
-        <img
-          src={creatureSelectingFrame}
-          className="creature-selecting-image"
-        />
-      )}
+    <div
+      className={`creature-container ${isSelected && "selected"}`}
+      onClick={() => onSelect()}
+    >
       {creatureIconPath && (
-        <>
+        <div className="creature-wrapper">
           <img
             src={creatureIconPath}
             className="creature-image"
@@ -66,7 +60,7 @@ const Creature = ({ index, creature, progress }: Props) => {
                   }%, 100% 0, 0 0)`,
             }}
           />
-        </>
+        </div>
       )}
       <p className="creature-text">{creature.name}</p>
       {isLocked && (

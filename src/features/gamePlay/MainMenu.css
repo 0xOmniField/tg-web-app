@@ -12,11 +12,11 @@
 }
 
 .main-content {
-  position: absolute;
-  transform: scale(0.5);
-  right: 0;
-  top: 12px;
-  width: 100%;
+  /* position: absolute; */
+  /* transform: scale(0.5); */
+  /* right: 0; */
+  /* top: 12px; */
+  /* width: 100%; */
 }
 
 .main-info-container {
@@ -132,6 +132,9 @@
   height: 259.4px;
   width: 295.96px;
   right: 30px;
+  right: 5px;
+  top: 8px;
+  transform: scale(0.5) translate(50%, -50%);
 }
 
 .main-circle-container-new {

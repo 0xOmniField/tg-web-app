@@ -27,11 +27,15 @@ const ProgramFilterBar = () => {
           isSelected={useAppSelector(selectIsAllResourcesToggled)}
           text={"All"}
           onClick={onClickAllResourcesToggle}
+          position="left"
         />
 
         {allResourceTypes.map((type, index) => (
           <ProgramFilterButton
             key={index}
+            position={
+              index === allResourceTypes.length - 1 ? "right" : "middle"
+            }
             isSelected={useAppSelector(selectIsResourceTypeToggled(type))}
             iconImagePath={getResourceIconPath(type)}
             onClick={onClickResourceTypeToggle(type)}

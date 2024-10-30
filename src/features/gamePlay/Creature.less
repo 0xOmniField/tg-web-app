@@ -5,6 +5,13 @@
   transform: translate(-50%, -50%);
   width: 100px;
   height: 128px;
+  background: url("@assets/games/backgrounds/robot_bg.png") no-repeat;
+  border-radius: 2px;
+  background-size: contain;
+  &.selected {
+    border-radius: 2px;
+    border: 2px solid #fff803;
+  }
 }
 
 .creature-background {
@@ -43,23 +50,42 @@
   bottom: 5px;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 10px;
+  font-size: 13px;
   text-align: center;
   line-height: 100%;
   margin: 0px;
   width: 50px;
   height: 10px;
-  color: #5cffff;
+  color: #322f7a;
   pointer-events: none;
+}
+.creature-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #3cc9a3;
+  border-radius: 1px;
+  border: 1px solid #219273;
+  width: 87px;
+  height: 98px;
+  transform: translate(-50%, -60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .creature-lock-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   background: #222257;
-  width: 85px;
-  height: 93px;
+  width: 87px;
+  height: 98px;
   transform: translate(-50%, -60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .creature-lock-image {
+  width: 44px;
+  height: 54px;
 }

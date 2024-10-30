@@ -6,6 +6,7 @@ interface Props {
   columnCount: number;
   rowCount: number;
   elements: Array<JSX.Element>;
+  style?: React.CSSProperties;
 }
 
 const Grid = ({
@@ -14,6 +15,7 @@ const Grid = ({
   columnCount,
   rowCount,
   elements,
+  style,
 }: Props) => {
   return (
     <div
@@ -28,6 +30,7 @@ const Grid = ({
         gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
         gridTemplateRows: `repeat(${rowCount}, 1fr)`,
         gap: "5px",
+        ...style,
       }}
     >
       {elements.map((element) => element)}

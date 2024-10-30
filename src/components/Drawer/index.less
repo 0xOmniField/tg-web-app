@@ -7,7 +7,10 @@
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
-  z-index: 100;
+  z-index: 50;
+  &.open {
+    z-index: 100;
+  }
 }
 
 .drawer.right {
@@ -67,17 +70,22 @@
   height: 28px;
   background: #14143c;
   border-radius: 50%;
-  border: 2px solid #4e4e8d;
   position: absolute;
   top: 50%;
 }
 .left-button {
   right: 0;
   transform: translate(50%, 0);
+  background: url("@assets/games/backgrounds/left_button.png") no-repeat;
+  background-size: contain;
+  background-position: right;
 }
 .right-button {
   left: 0;
   transform: translate(-50%, 0);
+  background: url("@assets/games/backgrounds/right_button.png") no-repeat;
+  background-size: contain;
+  background-position: left;
 }
 
 .overlay {
