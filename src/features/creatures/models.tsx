@@ -338,7 +338,6 @@ export const ProgramComponent = ({
   program: ProgramModel | null;
   showAnimation: boolean;
 }): JSX.Element | null => {
-  console.log(9999, images);
   const [bgImage, setBgImage] = useState<string | null>(null);
   useEffect(() => {
     if (program?.name) {

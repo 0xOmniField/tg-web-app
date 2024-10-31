@@ -41,10 +41,7 @@ interface Props {
 }
 
 const MainMenu = ({ localTimer }: Props) => {
-  const lightingLeftRef = useRef<HTMLDivElement>(null);
-  const lightingRightRef = useRef<HTMLDivElement>(null);
   const discRef = useRef<HTMLDivElement>(null);
-  const zombieRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const l2account = useAppSelector(selectL2Account);
   const uIState = useAppSelector(selectUIState);
@@ -138,17 +135,6 @@ const MainMenu = ({ localTimer }: Props) => {
     setTimeout(() => {
       discRef?.current?.classList?.add("show");
     }, 0);
-    setTimeout(() => {
-      lightingRightRef?.current?.classList?.add("show");
-    }, 0);
-
-    setTimeout(() => {
-      zombieRef.current?.classList.add("show");
-    }, 700); // 20帧，假设每帧约10ms
-
-    setTimeout(() => {
-      lightingLeftRef?.current?.classList?.add("show");
-    }, 4470); // 40帧
   };
 
   const selectedCreatureIndex = useAppSelector(selectSelectedCreatureIndex);
@@ -180,6 +166,8 @@ const MainMenu = ({ localTimer }: Props) => {
     currentProgramInfo.index,
   ]);
 
+  console.log(1111, selectedCreatureIndex, currentProgramInfo);
+
   return (
     <>
       <div className="main-content-wrapper">
@@ -198,7 +186,7 @@ const MainMenu = ({ localTimer }: Props) => {
                 onAnimationEnd={() => {
                   discRef?.current?.classList?.remove("show");
                 }}
-              ></div>
+              />
               <MainMenuProgressBar
                 programName={currentProgramInfo.program?.name ?? ""}
                 remainTime={currentProgramInfo.remainTime}
