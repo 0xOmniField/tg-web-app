@@ -16,38 +16,18 @@ import Bot1 from "@assets/games/CreatureBots/robot1.png";
 import Bot2 from "@assets/games/CreatureBots/robot2.png";
 import Bot3 from "@assets/games/CreatureBots/robot3.png";
 import Bot4 from "@assets/games/CreatureBots/robot4.png";
-import QuantumFrost from "@components/Games/Programs/QuantaForge";
-import BioGen from "@components/Games/Programs/BioGen";
-import AstroMine from "@components/Games/Programs/AstroMine";
-import EnerGex from "@components/Games/Programs/EnerGex";
-import XenoFloral from "@components/Games/Programs/XenoFloral";
-import FoamTap from "@components/Games/Programs/FoamTap";
-import CrystaBloom from "@components/Games/Programs/CrystaBloom";
-import EnerFusion from "@components/Games/Programs/EnerFusion";
-import QuantumScribeImage from "@assets/games/Animations/Programs/QuantumScribe/QuantumScribe_00.png";
-import QuantumFrostImage from "@assets/games/Animations/Programs/QuantumFrost/QuantumFrost_00.png";
-import QuantumSurgeImage from "@assets/games/Animations/Programs/QuantumSurge/QuantumSurge_00.png";
-import QuantaForgeImage from "@assets/games/Animations/Programs/QuantaForge/QuantaForge_00.png";
-import AespaImage from "@assets/games/Animations/Programs/Aespa/Aespa_00.png";
-import BioGenImage from "@assets/games/Animations/Programs/BioGen/BioGen_00.png";
-import BioFusionImage from "@assets/games/Animations/Programs/BioFusion/BioFusion_00.png";
-import AstroMineImage from "@assets/games/Animations/Programs/AstroMine/AstroMine_00.png";
-import TitaniumBoostImage from "@assets/games/Animations/Programs/TitaniumBoost/TitaniumBoost_00.png";
-import QuantumLeapImage from "@assets/games/Animations/Programs/QuantumLeap/QuantumLeap_00.png";
-import BioSurgeImage from "@assets/games/Animations/Programs/BioSurge/BioSurge_00.png";
-import BioHarvestImage from "@assets/games/Animations/Programs/BioHarvest/BioHarvest_00.png";
-import EnerGexImage from "@assets/games/Animations/Programs/EnerGex/EnerGex_00.png";
-import EtherWeaveImage from "@assets/games/Animations/Programs/EtherWeave/EtherWeave_00.png";
-import BioCastImage from "@assets/games/Animations/Programs/BioCast/BioCast_00.png";
-import AstroChargeImage from "@assets/games/Animations/Programs/AstroCharge/AstroCharge_00.png";
-import BioSynthesisImage from "@assets/games/Animations/Programs/BioSynthesis/BioSynthesis_00.png";
-import XenoFloralImage from "@assets/games/Animations/Programs/XenoFloral/XenoFloral_00.png";
-import FoamTapImage from "@assets/games/Animations/Programs/FoamTap/FoamTap_00.png";
-import CrystaBloomImage from "@assets/games/Animations/Programs/CrystaBloom/CrystaBloom_00.png";
-import EnerGateImage from "@assets/games/Animations/Programs/EnerGate/EnerGate_00.png";
-import EnerFusionImage from "@assets/games/Animations/Programs/EnerFusion/EnerFusion_00.png";
-import QuantumCoreImage from "@assets/games/Animations/Programs/QuantumCore/QuantumCore_00.png";
-import XenoBloomImage from "@assets/games/Animations/Programs/XenoBloom/XenoBloom_00.png";
+
+import { useEffect, useState } from "react";
+const images = import.meta.glob("@assets/games/Animations/Programs/*.png");
+
+const getImageUrl = async (name: string) => {
+  const path = `/src/assets/games/Animations/Programs/${name}.png`;
+  if (images[path]) {
+    const module = await images[path]();
+    return module?.default;
+  }
+  return null;
+};
 
 export interface CreatureModel {
   rareResources: ResourceAmountPair[];
@@ -351,118 +331,32 @@ export function getCreatureIconPath(creatureType: number): string {
     : botIconPaths[creatureType % botIconPaths.length];
 }
 
-export function getProgramComponent(
-  program: ProgramModel | null,
-  showAnimation: boolean
-): JSX.Element | null {
-  if (program == null) {
-    return null;
-  }
-
-  switch (program.type) {
-    // case ProgramType.QuantumScribe:
-    //   return <QuantumScribe showAnimation={showAnimation} />;
-    case ProgramType.QuantumFrost:
-      return <QuantumFrost showAnimation={showAnimation} />;
-    // case ProgramType.QuantumSurge:
-    //   return <QuantumSurge showAnimation={showAnimation} />;
-    // case ProgramType.QuantaForge:
-    //   return <QuantaForge showAnimation={showAnimation} />;
-    // case ProgramType.Aespa:
-    //   return <Aespa showAnimation={showAnimation} />;
-    case ProgramType.BioGen:
-      return <BioGen showAnimation={showAnimation} />;
-    // case ProgramType.BioFusion:
-    //   return <BioFusion showAnimation={showAnimation} />;
-    case ProgramType.AstroMine:
-      return <AstroMine showAnimation={showAnimation} />;
-    // case ProgramType.TitaniumBoost:
-    //   return <TitaniumBoost showAnimation={showAnimation} />;
-    // case ProgramType.QuantumLeap:
-    //   return <QuantumLeap showAnimation={showAnimation} />;
-    // case ProgramType.BioSurge:
-    //   return <BioSurge showAnimation={showAnimation} />;
-    // case ProgramType.BioHarvest:
-    //   return <BioHarvest showAnimation={showAnimation} />;
-    case ProgramType.EnerGex:
-      return <EnerGex showAnimation={showAnimation} />;
-    // case ProgramType.EtherWeave:
-    //   return <EtherWeave showAnimation={showAnimation} />;
-    // case ProgramType.BioCast:
-    //   return <BioCast showAnimation={showAnimation} />;
-    // case ProgramType.AstroCharge:
-    //   return <AstroCharge showAnimation={showAnimation} />;
-    // case ProgramType.BioSynthesis:
-    //   return <BioSynthesis showAnimation={showAnimation} />;
-    case ProgramType.XenoFloral:
-      return <XenoFloral showAnimation={showAnimation} />;
-    case ProgramType.FoamTap:
-      return <FoamTap showAnimation={showAnimation} />;
-    case ProgramType.CrystaBloom:
-      return <CrystaBloom showAnimation={showAnimation} />;
-    // case ProgramType.EnerGate:
-    //   return <EnerGate showAnimation={showAnimation} />;
-    case ProgramType.EnerFusion:
-      return <EnerFusion showAnimation={showAnimation} />;
-    // case ProgramType.QuantumCore:
-    //   return <QuantumCore showAnimation={showAnimation} />;
-    // case ProgramType.XenoBloom:
-    //   return <XenoBloom showAnimation={showAnimation} />;
-  }
-
-  return <BioGen showAnimation={showAnimation} />;
-}
-
-export function getProgramIconPath(type: ProgramType): string {
-  switch (type) {
-    case ProgramType.QuantumScribe:
-      return QuantumScribeImage;
-    case ProgramType.QuantumFrost:
-      return QuantumFrostImage;
-    case ProgramType.QuantumSurge:
-      return QuantumSurgeImage;
-    case ProgramType.QuantaForge:
-      return QuantaForgeImage;
-    case ProgramType.Aespa:
-      return AespaImage;
-    case ProgramType.BioGen:
-      return BioGenImage;
-    case ProgramType.BioFusion:
-      return BioFusionImage;
-    case ProgramType.AstroMine:
-      return AstroMineImage;
-    case ProgramType.TitaniumBoost:
-      return TitaniumBoostImage;
-    case ProgramType.QuantumLeap:
-      return QuantumLeapImage;
-    case ProgramType.BioSurge:
-      return BioSurgeImage;
-    case ProgramType.BioHarvest:
-      return BioHarvestImage;
-    case ProgramType.EnerGex:
-      return EnerGexImage;
-    case ProgramType.EtherWeave:
-      return EtherWeaveImage;
-    case ProgramType.BioCast:
-      return BioCastImage;
-    case ProgramType.AstroCharge:
-      return AstroChargeImage;
-    case ProgramType.BioSynthesis:
-      return BioSynthesisImage;
-    case ProgramType.XenoFloral:
-      return XenoFloralImage;
-    case ProgramType.FoamTap:
-      return FoamTapImage;
-    case ProgramType.CrystaBloom:
-      return CrystaBloomImage;
-    case ProgramType.EnerGate:
-      return EnerGateImage;
-    case ProgramType.EnerFusion:
-      return EnerFusionImage;
-    case ProgramType.QuantumCore:
-      return QuantumCoreImage;
-    case ProgramType.XenoBloom:
-      return XenoBloomImage;
-  }
-  return BioGenImage;
-}
+export const ProgramComponent = ({
+  program,
+  showAnimation,
+}: {
+  program: ProgramModel | null;
+  showAnimation: boolean;
+}): JSX.Element | null => {
+  console.log(9999, images);
+  const [bgImage, setBgImage] = useState<string | null>(null);
+  useEffect(() => {
+    if (program?.name) {
+      getImageUrl(program.name).then((url) => {
+        if (url) setBgImage(url);
+      });
+    }
+  }, [program?.name]);
+  return program == null ? null : (
+    <div
+      className="main-bot-program-image"
+      style={
+        showAnimation
+          ? { animation: `${program.name} 2s steps(24) infinite` }
+          : {
+              backgroundImage: `url(${bgImage})`,
+            }
+      }
+    />
+  );
+};

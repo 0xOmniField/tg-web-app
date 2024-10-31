@@ -1,5 +1,5 @@
 import "./MainMenuProgram.css";
-import { ProgramModel, getProgramComponent } from "@features/creatures/models";
+import { ProgramComponent, ProgramModel } from "@features/creatures/models";
 
 import {
   selectIsSelectingUIState,
@@ -57,7 +57,7 @@ const MainMenuProgram = ({
         }
       >
         {/* {getProgramComponent(program, isCurrent && !isStop)} */}
-        {getProgramComponent(program, false)}
+        <ProgramComponent program={program} showAnimation={false} />
       </div>
     </div>
   );

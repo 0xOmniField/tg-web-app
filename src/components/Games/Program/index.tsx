@@ -6,6 +6,17 @@ import {
   getResourceIconPath,
   ProgramModel,
 } from "@features/creatures/models";
+import { useState } from "react";
+const images = import.meta.glob("@assets/games/Animations/Programs/*.png");
+
+const getImageUrl = async (name: string) => {
+  const path = `/src/assets/games/Animations/Programs/${name}.png`;
+  if (images[path]) {
+    const module = await images[path]();
+    return module?.default;
+  }
+  return null;
+};
 
 interface Props {
   program: ProgramModel;
@@ -13,6 +24,10 @@ interface Props {
 }
 
 const Program = ({ program, onSelect }: Props) => {
+  const [bgImage, setBgImage] = useState<string | null>(null);
+  getImageUrl(program.name).then((url) => {
+    if (url) setBgImage(url);
+  });
   return (
     <div className="program-container" onClick={onSelect}>
       <div className="flex items-baseline justify-between">
@@ -25,10 +40,7 @@ const Program = ({ program, onSelect }: Props) => {
         className="flex justify-center h-14 items-center mt-1"
         style={{ background: "#3CC9A3", height: 60 }}
       >
-        <img
-          src={getProgramIconPath(program.type)}
-          className="program-icon-image"
-        />
+        <img src={bgImage} className="program-icon-image" />
       </div>
 
       <div className="program-resource-grid">
