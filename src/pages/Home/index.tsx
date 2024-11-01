@@ -1,14 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "@app/hooks";
-import {
-  getConfig,
-  sendTransaction,
-  queryState,
-  SERVER_TICK_TO_SECOND,
-} from "@api/client";
+import { getConfig, sendTransaction, queryState } from "@api/client";
 import { getInsPlayerTransactionCommandArray } from "@api/rpc";
 import { useAppSelector } from "@app/hooks";
-import { selectL2Account } from "@src/components/account/accountSlice";
 import {
   UIState,
   selectUIState,
@@ -17,11 +11,7 @@ import {
 } from "../../features/automata/propertiesSlice";
 import GamePlay from "../../features/gamePlay";
 import WelcomePage from "../../components/WelcomePage";
-import {
-  loginL2AccountAsync,
-  selectL1Account,
-} from "../../components/Account/accountSlice";
-import { useSignMessage } from "wagmi";
+import { selectL2Account } from "@components/Account/accountSlice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +58,7 @@ const Home = () => {
     const urls = Object.keys(images);
     urls.forEach((path) => {
       const img = new Image();
-      img.src = images[path].default;
+      img.src = images?.[path]?.default;
 
       img.onload = () => {
         loadedCount++;
@@ -80,7 +70,7 @@ const Home = () => {
       };
 
       img.onerror = () => {
-        console.error(`Failed to load image: ${images[path].default}`);
+        console.error(`Failed to load image: ${images?.[path]?.default}`);
         loadedCount++;
         if (loadedCount === urls.length) {
           onReady();

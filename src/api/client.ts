@@ -65,9 +65,9 @@ export const queryState = createAsyncThunk<
     { rejectWithValue }
   ) => {
     try {
-      const { cmd, prikey } = params;
-      const res = await query_state(cmd, prikey);
-      const datas = JSON.parse(res.data);
+      const { prikey } = params;
+      const res = await query_state(prikey);
+      const datas = JSON.parse(res?.data);
       // TODO: 假数据
       // const datas = JSON.parse(
       //   '{"player":[{"nonce":0,"data":{"objects":[],"local":[30,30,0,0,2,0,0,0]}},[],50724],"state":{}}'

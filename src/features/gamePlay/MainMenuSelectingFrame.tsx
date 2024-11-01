@@ -1,4 +1,3 @@
-import React from "react";
 import currentFrame from "@assets/games/MainMenu/selecting_frame.png";
 import currentFrameStop from "@assets/games/MainMenu/selecting_frame_red.png";
 import selectingFrame1 from "@assets/games/MainMenu/select1.png";
@@ -11,6 +10,7 @@ import selectingFrame7 from "@assets/games/MainMenu/select7.png";
 import selectingFrame8 from "@assets/games/MainMenu/select8.png";
 
 import "./MainMenuSelectingFrame.css";
+import React from "react";
 
 interface Props {
   order: number | null;

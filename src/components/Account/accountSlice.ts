@@ -85,7 +85,7 @@ export const accountSlice = createSlice({
       .addCase(loginL2AccountAsync.fulfilled, (state, c) => {
         state.status = "Ready";
         console.log(c);
-        state.l2account = c.payload;
+        state.l2account = c.payload as any;
       });
   },
 });

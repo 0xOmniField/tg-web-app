@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import image_00 from "@assets/games/Animations/Programs/EnerFusion/EnerFusion_00.png";
 import image_01 from "@assets/games/Animations/Programs/EnerFusion/EnerFusion_01.png";

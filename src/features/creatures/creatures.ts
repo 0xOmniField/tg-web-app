@@ -107,13 +107,13 @@ export const creaturesSlice = createSlice({
       state.creatingCreature = getCreatingCreature(action.payload.creatureType);
       state.selectingProgramIndex = 0;
     },
-    startRebootCreature: (state, action) => {
+    startRebootCreature: (state) => {
       if (state.selectedCreatureIndex != NOT_SELECTING_CREATURE) {
         state.rebootCreature = state.creatures[state.selectedCreatureIndex];
         state.selectingProgramIndex = 0;
       }
     },
-    clearRebootCreature: (state, action) => {
+    clearRebootCreature: (state) => {
       state.rebootCreature = null;
     },
     setProgramIndex: (state, action) => {
@@ -131,10 +131,10 @@ export const creaturesSlice = createSlice({
     setSelectingProgramIndex: (state, action) => {
       state.selectingProgramIndex = action.payload.selectingIndex;
     },
-    nextPage: (state, action) => {
+    nextPage: (state) => {
       state.currentPage += 1;
     },
-    prevPage: (state, action) => {
+    prevPage: (state) => {
       state.currentPage = Math.max(0, state.currentPage - 1);
     },
   },

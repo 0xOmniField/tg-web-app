@@ -1,11 +1,10 @@
-import React from "react";
 import "./MainMenuWarning.css";
 import { UIState, selectUIState } from "@features/automata/propertiesSlice";
 import {
   selectIsNotSelectingCreature,
   selectSelectedCreaturePrograms,
 } from "@features/creatures/creatures";
-import { useAppDispatch, useAppSelector } from "@app/hooks";
+import { useAppSelector } from "@app/hooks";
 
 const MainMenuWarning = () => {
   const uIState = useAppSelector(selectUIState);

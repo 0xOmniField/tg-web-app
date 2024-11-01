@@ -24,7 +24,7 @@ const getImageUrl = async (name: string) => {
   const path = `/src/assets/games/Animations/Programs/${name}.png`;
   if (images[path]) {
     const module = await images[path]();
-    return module?.default;
+    return (module as any)?.default;
   }
   return null;
 };

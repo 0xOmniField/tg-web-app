@@ -7,6 +7,7 @@ import type {
 } from "axios";
 
 export interface ResponseData {
+  success: any;
   message?: string; // 兼容bsp返回数据格式报错
   code: number;
   data: any;
@@ -36,6 +37,7 @@ export interface NewAxiosRequestConfig<D = ResponseData>
 // }
 
 /** 拓展Axios类型定义 */
+// @ts-ignore
 interface NewAxios extends Axios {
   interceptors: {
     request: AxiosInterceptorManager<NewAxiosRequestConfig>;

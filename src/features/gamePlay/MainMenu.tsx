@@ -103,10 +103,10 @@ const MainMenu = ({ localTimer }: Props) => {
             (action) => {
               if (queryState.fulfilled.match(action)) {
                 dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
+                dispatch(clearRebootCreature());
               } else {
                 dispatch(setUIState({ uIState: UIState.Idle }));
-                dispatch(clearRebootCreature({}));
+                dispatch(clearRebootCreature());
               }
             }
           );
@@ -120,7 +120,7 @@ const MainMenu = ({ localTimer }: Props) => {
   function onClickReboot() {
     if (!isLoading) {
       dispatch(setUIState({ uIState: UIState.Reboot }));
-      dispatch(startRebootCreature({}));
+      dispatch(startRebootCreature());
     }
   }
 

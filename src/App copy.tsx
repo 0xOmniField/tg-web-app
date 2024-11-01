@@ -55,7 +55,7 @@ function App() {
         onClick={async () => {
           if (account.address) {
             alert("请打开metamask签名");
-            let result = await signMessageAsync({ message: account.address });
+            const result = await signMessageAsync({ message: account.address });
             setL2Address(result);
           } else {
             alert("Account address is undefined");

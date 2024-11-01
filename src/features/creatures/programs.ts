@@ -46,7 +46,7 @@ export const programsSlice = createSlice({
   name: "programs",
   initialState,
   reducers: {
-    resetFilter: (state, action) => {
+    resetFilter: (state) => {
       state.currentPage = 0;
       state.filter = allResourcesToggleFilter;
     },
@@ -55,10 +55,10 @@ export const programsSlice = createSlice({
       const type = action.payload.type as ResourceType;
       state.filter.dict[type] = !(state.filter.dict[type] ?? true);
     },
-    nextPage: (state, action) => {
+    nextPage: (state) => {
       state.currentPage += 1;
     },
-    prevPage: (state, action) => {
+    prevPage: (state) => {
       state.currentPage = Math.max(0, state.currentPage - 1);
     },
   },

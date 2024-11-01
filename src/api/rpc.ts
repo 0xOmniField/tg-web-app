@@ -17,7 +17,7 @@ export async function send_transaction(cmd: Array<bigint>, prikey: string) {
   }
 }
 
-export async function query_state(cmd: Array<bigint>, prikey: string) {
+export async function query_state(prikey: string) {
   try {
     const data = query(prikey);
     console.log("query data", data);

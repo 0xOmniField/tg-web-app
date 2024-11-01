@@ -16,7 +16,7 @@ import {
 
 const ProgramFilterBar = () => {
   const dispatch = useAppDispatch();
-  const onClickAllResourcesToggle = () => dispatch(resetFilter({}));
+  const onClickAllResourcesToggle = () => dispatch(resetFilter());
   const onClickResourceTypeToggle = (type: ResourceType) => () =>
     dispatch(toggleFilter({ type: type }));
 
@@ -36,6 +36,7 @@ const ProgramFilterBar = () => {
             position={
               index === allResourceTypes.length - 1 ? "right" : "middle"
             }
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             isSelected={useAppSelector(selectIsResourceTypeToggled(type))}
             iconImagePath={getResourceIconPath(type)}
             onClick={onClickResourceTypeToggle(type)}

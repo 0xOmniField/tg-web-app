@@ -16,13 +16,7 @@ interface Props {
   showingAnimation: boolean;
 }
 
-const MainMenuProgram = ({
-  isCurrent,
-  isStop,
-  order,
-  program,
-  showingAnimation,
-}: Props) => {
+const MainMenuProgram = ({ order, program, showingAnimation }: Props) => {
   const dispatch = useAppDispatch();
   const isSelectingUIState = useAppSelector(selectIsSelectingUIState);
   const isLoading = useAppSelector(selectIsLoading);

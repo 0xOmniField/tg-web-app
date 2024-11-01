@@ -65,11 +65,11 @@ const Command: React.FC = () => {
   };
 
   const onClickPrevPageButton = () => {
-    dispatch(prevPage({}));
+    dispatch(prevPage());
   };
 
   const onClickNextPageButton = () => {
-    dispatch(nextPage({}));
+    dispatch(nextPage());
   };
   const enableNextPageButton = currentPage < pageCount - 1;
   const enablePrevPageButton = currentPage > 0;

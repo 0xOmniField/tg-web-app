@@ -1,4 +1,3 @@
-import React from "react";
 import progressBarBackground from "@assets/games/MainMenu/circle_bg.png";
 import "./MainMenuProgressBar.css";
 import { formatTime } from "@features/creatures/creatures";

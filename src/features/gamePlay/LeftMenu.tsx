@@ -57,13 +57,13 @@ const LeftMenu = ({ localTimer }: Props) => {
 
   const onClickPrevPageButton = () => {
     if (!isLoading) {
-      dispatch(prevPage({}));
+      dispatch(prevPage());
     }
   };
 
   const onClickNextPageButton = () => {
     if (!isLoading) {
-      dispatch(nextPage({}));
+      dispatch(nextPage());
     }
   };
 

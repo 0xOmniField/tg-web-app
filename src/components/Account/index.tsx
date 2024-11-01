@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import {
   loginL2AccountAsync,
   selectL1Account,
   setL1AllAccount,
 } from "./accountSlice";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
+import { useAccount, useConnect, useSignMessage } from "wagmi";
 import "./index.css";
 import PlayButton from "@components/PlayButton";
 
 const Account: React.FC = () => {
   const account = useAccount();
   const dispatch = useAppDispatch();
-  const { connectors, connect, status } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { connectors, connect } = useConnect();
+  // const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
-  const [l2Address, setL2Address] = useState("");
+  // const [l2Address, setL2Address] = useState("");
   const l1account = useAppSelector(selectL1Account);
 
   const connectWallet = useCallback(() => {

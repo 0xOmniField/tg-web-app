@@ -23,19 +23,19 @@
 
 .left-top {
   height: 190px;
-  background-image: url("@assets/games/backgrounds/left_top.png");
+  /* background-image: url("@assets/games/backgrounds/left_top.png"); */
   background-repeat: no-repeat;
 }
 
 .left-middle {
   flex-grow: 1;
-  background-image: url("@assets/games/backgrounds/left_mid.png");
+  /* background-image: url("@assets/games/backgrounds/left_mid.png"); */
   background-repeat: repeat-y;
 }
 
 .left-bottom {
   height: 190px;
-  background-image: url("@assets/games/backgrounds/left_bottom.png");
+  /* background-image: url("@assets/games/backgrounds/left_bottom.png"); */
   background-repeat: no-repeat;
 }
 

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@app/store";
 import { getConfig, sendTransaction, queryState } from "@api/client";
-import { ResourceAmountPair, emptyCommonResources } from "./models";
+import { ResourceAmountPair } from "@features/creatures/models";
 
 export enum UIState {
   Init,
@@ -45,20 +45,20 @@ export const propertiesSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getConfig.fulfilled, (state, action) => {
+      .addCase(getConfig.fulfilled, (state) => {
         state.uIState = UIState.QueryState;
         console.log("query config fulfilled");
       })
-      .addCase(getConfig.rejected, (state, action) => {
+      .addCase(getConfig.rejected, (_state, action) => {
         console.log(`query config rejected: ${action.payload}`);
       })
-      .addCase(sendTransaction.fulfilled, (state, action) => {
+      .addCase(sendTransaction.fulfilled, (state) => {
         if (state.uIState == UIState.CreatePlayer) {
           state.uIState = UIState.Guide;
         }
         console.log("send transaction fulfilled");
       })
-      .addCase(sendTransaction.rejected, (state, action) => {
+      .addCase(sendTransaction.rejected, (_state, action) => {
         console.log(`send transaction rejected: ${action.payload}`);
       })
       .addCase(queryState.fulfilled, (state, action) => {
