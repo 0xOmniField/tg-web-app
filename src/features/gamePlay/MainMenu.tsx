@@ -35,6 +35,8 @@ import RebootButton from "./RebootButton";
 import { getTransactionCommandArray } from "@api/rpc";
 import { selectL2Account } from "@components/Account/accountSlice";
 import { getCreatureIconPath } from "@features/creatures/models";
+import Lottie from "lottie-react";
+// import discAnimation from "@assets/games/Animations/disc.json";
 
 interface Props {
   localTimer: number;
@@ -166,7 +168,8 @@ const MainMenu = ({ localTimer }: Props) => {
     currentProgramInfo.index,
   ]);
 
-  console.log(1111, selectedCreatureIndex, currentProgramInfo);
+  const creatureIconPath = getCreatureIconPath(selectedCreature.creatureType);
+  console.log(1111, selectedCreature);
 
   return (
     <>
@@ -191,7 +194,7 @@ const MainMenu = ({ localTimer }: Props) => {
                 programName={currentProgramInfo.program?.name ?? ""}
                 remainTime={currentProgramInfo.remainTime}
                 progress={currentProgramInfo.progress}
-                iconPath={getCreatureIconPath(selectedCreature.creatureType)}
+                iconPath={creatureIconPath.bot}
                 isCreating={isCreatingUIState}
                 showAnimation={showUnlockAnimation}
               />
@@ -236,6 +239,22 @@ const MainMenu = ({ localTimer }: Props) => {
           </div>
         )}
       </div>
+      {creatureIconPath.background && (
+        <Lottie
+          animationData={creatureIconPath.background}
+          loop={true}
+          className="absolute z-0"
+        />
+      )}
+
+      {creatureIconPath.role && (
+        <Lottie
+          animationData={creatureIconPath.role}
+          loop={true}
+          className="absolute top-1/2"
+          style={{ transform: "translateY(-50%)" }}
+        />
+      )}
     </>
   );
 };

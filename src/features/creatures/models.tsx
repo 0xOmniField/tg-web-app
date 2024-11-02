@@ -16,6 +16,14 @@ import Bot1 from "@assets/games/CreatureBots/robot1.png";
 import Bot2 from "@assets/games/CreatureBots/robot2.png";
 import Bot3 from "@assets/games/CreatureBots/robot3.png";
 import Bot4 from "@assets/games/CreatureBots/robot4.png";
+import Bot1Background from "@assets/games/Animations/background/1.json";
+import Bot2Background from "@assets/games/Animations/background/2.json";
+import Bot3Background from "@assets/games/Animations/background/3.json";
+import Bot4Background from "@assets/games/Animations/background/4.json";
+import Bot1RoleAnimation from "@assets/games/Animations/role/1.json";
+import Bot2RoleAnimation from "@assets/games/Animations/role/2.json";
+import Bot3RoleAnimation from "@assets/games/Animations/role/3.json";
+import Bot4RoleAnimation from "@assets/games/Animations/role/4.json";
 
 import { useEffect, useState } from "react";
 const images = import.meta.glob("@assets/games/Animations/Programs/*.png");
@@ -323,13 +331,44 @@ export function getNumberAbbr(num: number): string {
   return sign + num.toString();
 }
 
-const botIconPaths = [Bot1, Bot2, Bot3, Bot4];
+const botIconPaths = [
+  {
+    bot: Bot1,
+    background: Bot1Background,
+    role: Bot1RoleAnimation,
+  },
+  {
+    bot: Bot2,
+    background: Bot2Background,
+    role: Bot2RoleAnimation,
+  },
+  {
+    bot: Bot3,
+    background: Bot3Background,
+    role: Bot3RoleAnimation,
+  },
+  {
+    bot: Bot4,
+    background: Bot4Background,
+    role: Bot4RoleAnimation,
+  },
+];
 
-export function getCreatureIconPath(creatureType: number): string {
+export const getCreatureIconPath = (
+  creatureType: number
+): {
+  bot: string;
+  background: any;
+  role: any;
+} => {
   return creatureType == -1
-    ? ""
+    ? {
+        bot: "",
+        background: Bot1Background,
+        role: "",
+      }
     : botIconPaths[creatureType % botIconPaths.length];
-}
+};
 
 export const ProgramComponent = ({
   program,

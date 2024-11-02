@@ -47,10 +47,14 @@ const Creature = ({ index, creature, progress }: Props) => {
       className={`creature-container ${isSelected && "selected"}`}
       onClick={() => onSelect()}
     >
-      {creatureIconPath && (
+      {creatureIconPath.bot && (
         <div className="creature-wrapper">
           <img
-            src={creatureIconPath}
+            src={creatureIconPath.bot}
+            className="creature-image-background"
+          />
+          <img
+            src={creatureIconPath.bot}
             className="creature-image"
             style={{
               clipPath: isLocked

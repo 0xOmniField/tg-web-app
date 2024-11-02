@@ -18,6 +18,7 @@
     "crypto-browserify": "^3.12.1",
     "delphinus-curves": "github:DelphinusLab/delphinus-curves#yyu/hybridPackage",
     "ethers": "^6.13.2",
+    "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

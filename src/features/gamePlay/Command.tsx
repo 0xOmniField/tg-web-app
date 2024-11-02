@@ -73,7 +73,6 @@ const Command: React.FC = () => {
   };
   const enableNextPageButton = currentPage < pageCount - 1;
   const enablePrevPageButton = currentPage > 0;
-  // console.log(11111, programsBeforePaging, programs);
 
   return (
     <div className="bottom">

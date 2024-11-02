@@ -74,7 +74,7 @@ const LeftMenu = ({ localTimer }: Props) => {
       window.removeEventListener("resize", updateCreatureGridHeight);
     };
   }, []);
-  // console.log(11111, creatureGridHeight, creaturesBeforePaging, creatures);
+
   return (
     <Drawer
       showButton
