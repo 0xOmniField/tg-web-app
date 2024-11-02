@@ -2,7 +2,7 @@ FROM node:20 AS build
 WORKDIR /app
 
 COPY . /app/
-RUN  npm install  && npm run build
+RUN  rm -rf node_modules package-lock.json && npm install  && npm run build
 
 FROM nginx:alpine
 
