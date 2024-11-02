@@ -169,7 +169,6 @@ const MainMenu = ({ localTimer }: Props) => {
   ]);
 
   const creatureIconPath = getCreatureIconPath(selectedCreature.creatureType);
-  console.log(1111, selectedCreature);
 
   return (
     <>
