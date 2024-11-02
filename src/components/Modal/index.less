@@ -1,0 +1,20 @@
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  z-index: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  &.open {
+    z-index: 51;
+    display: block;
+  }
+}
+
+.modal-content {
+  position: relative;
+  height: 100%;
+}

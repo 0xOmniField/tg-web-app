@@ -9,6 +9,7 @@ interface Props {
   iconPath: string;
   isCreating: boolean;
   showAnimation: boolean;
+  onClick?: () => void;
 }
 
 const MainMenuProgressBar = ({
@@ -18,9 +19,10 @@ const MainMenuProgressBar = ({
   iconPath,
   isCreating,
   showAnimation,
+  onClick,
 }: Props) => {
   return (
-    <div className="main-progress-bar-container">
+    <div className="main-progress-bar-container" onClick={onClick}>
       <img
         src={progressBarBackground}
         className="main-progress-bar-background"
