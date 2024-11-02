@@ -37,7 +37,6 @@ import { selectL2Account } from "@components/Account/accountSlice";
 import { getCreatureIconPath } from "@features/creatures/models";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import Modal from "@components/Modal";
-import Command from "./Command";
 // import discAnimation from "@assets/games/Animations/disc.json";
 
 interface Props {

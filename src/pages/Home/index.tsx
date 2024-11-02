@@ -110,7 +110,7 @@ const Home = () => {
   ) : (
     <WelcomePage progress={progress} message={message} />
   );
-  return <GamePlay />;
+  // return <GamePlay />;
 };
 
 export default Home;
