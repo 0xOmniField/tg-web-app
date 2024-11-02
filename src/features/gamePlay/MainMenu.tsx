@@ -35,7 +35,8 @@ import RebootButton from "./RebootButton";
 import { getTransactionCommandArray } from "@api/rpc";
 import { selectL2Account } from "@components/Account/accountSlice";
 import { getCreatureIconPath } from "@features/creatures/models";
-import Lottie from "lottie-react";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import Modal from "@components/Modal";
 // import discAnimation from "@assets/games/Animations/disc.json";
 
 interface Props {
@@ -43,6 +44,9 @@ interface Props {
 }
 
 const MainMenu = ({ localTimer }: Props) => {
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const discRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const l2account = useAppSelector(selectL2Account);
@@ -137,6 +141,9 @@ const MainMenu = ({ localTimer }: Props) => {
     setTimeout(() => {
       discRef?.current?.classList?.add("show");
     }, 0);
+    setTimeout(() => {
+      lottieRef.current?.play();
+    }, 700); // 20帧，假设每帧约10ms
   };
 
   const selectedCreatureIndex = useAppSelector(selectSelectedCreatureIndex);
@@ -170,6 +177,62 @@ const MainMenu = ({ localTimer }: Props) => {
 
   const creatureIconPath = getCreatureIconPath(selectedCreature.creatureType);
 
+  const getCircle = (style?: any) => {
+    return (
+      <div className="main-circle-container" style={style}>
+        <div
+          ref={discRef}
+          className={`main-circle-container-new`}
+          onAnimationEnd={() => {
+            discRef?.current?.classList?.remove("show");
+          }}
+        />
+        <MainMenuProgressBar
+          programName={currentProgramInfo.program?.name ?? ""}
+          remainTime={currentProgramInfo.remainTime}
+          progress={currentProgramInfo.progress}
+          iconPath={creatureIconPath.bot}
+          isCreating={isCreatingUIState}
+          showAnimation={showUnlockAnimation}
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        />
+        <div className="main-circle-background"></div>
+        <MainMenuSelectingFrame
+          order={currentProgramInfo.index}
+          isCurrentProgram={!isSelectingUIState}
+          isStop={selectedCreature.isProgramStop}
+        />
+        {showUnlockAnimation && <div className="main-bot-creating-animation" />}
+        {selectedCreaturePrograms.map((program, index) => (
+          <MainMenuProgram
+            key={index}
+            isCurrent={!isSelectingUIState && currentProgramInfo.index == index}
+            isStop={selectedCreature.isProgramStop}
+            order={index}
+            program={program}
+            showingAnimation={isSelectingUIState}
+          />
+        ))}
+        <MainMenuWarning />
+        {showConfirmButton && (
+          <ConfirmButton
+            isDisabled={!enableConfirmButton}
+            onClick={() => onClickConfirm()}
+          />
+        )}
+        {showUnlockButton && (
+          <UnlockButton
+            isDisabled={!enableUnlockButton}
+            onClick={() => onClickUnlock()}
+          />
+        )}
+        {showRebootButton && <RebootButton onClick={() => onClickReboot()} />}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="main-content-wrapper">
@@ -181,60 +244,7 @@ const MainMenu = ({ localTimer }: Props) => {
                 diffResources={selectedCreatureDiffResources}
               />
             </div>
-            <div className="main-circle-container">
-              <div
-                ref={discRef}
-                className={`main-circle-container-new`}
-                onAnimationEnd={() => {
-                  discRef?.current?.classList?.remove("show");
-                }}
-              />
-              <MainMenuProgressBar
-                programName={currentProgramInfo.program?.name ?? ""}
-                remainTime={currentProgramInfo.remainTime}
-                progress={currentProgramInfo.progress}
-                iconPath={creatureIconPath.bot}
-                isCreating={isCreatingUIState}
-                showAnimation={showUnlockAnimation}
-              />
-              <div className="main-circle-background"></div>
-              <MainMenuSelectingFrame
-                order={currentProgramInfo.index}
-                isCurrentProgram={!isSelectingUIState}
-                isStop={selectedCreature.isProgramStop}
-              />
-              {showUnlockAnimation && (
-                <div className="main-bot-creating-animation" />
-              )}
-              {selectedCreaturePrograms.map((program, index) => (
-                <MainMenuProgram
-                  key={index}
-                  isCurrent={
-                    !isSelectingUIState && currentProgramInfo.index == index
-                  }
-                  isStop={selectedCreature.isProgramStop}
-                  order={index}
-                  program={program}
-                  showingAnimation={isSelectingUIState}
-                />
-              ))}
-              <MainMenuWarning />
-              {showConfirmButton && (
-                <ConfirmButton
-                  isDisabled={!enableConfirmButton}
-                  onClick={() => onClickConfirm()}
-                />
-              )}
-              {showUnlockButton && (
-                <UnlockButton
-                  isDisabled={!enableUnlockButton}
-                  onClick={() => onClickUnlock()}
-                />
-              )}
-              {showRebootButton && (
-                <RebootButton onClick={() => onClickReboot()} />
-              )}
-            </div>
+            {getCircle()}
           </div>
         )}
       </div>
@@ -248,12 +258,22 @@ const MainMenu = ({ localTimer }: Props) => {
 
       {creatureIconPath.role && (
         <Lottie
+          lottieRef={lottieRef}
           animationData={creatureIconPath.role}
-          loop={true}
           className="absolute top-1/2"
           style={{ transform: "translateY(-50%)" }}
         />
       )}
+      <Modal isOpen={modalOpen} onVisibleChange={setModalOpen}>
+        <div>
+          {getCircle({
+            transform: "scale(1) translate(50%, -50%)",
+            top: "150px",
+            right: "50%",
+          })}
+          {/* <Command /> */}
+        </div>
+      </Modal>
     </>
   );
 };

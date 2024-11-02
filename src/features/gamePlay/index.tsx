@@ -91,7 +91,6 @@ const GamePlay: React.FC = () => {
         <LeftMenu localTimer={localTimer} />
         <MainMenu localTimer={localTimer} />
         <RightMenu />
-
         <Command />
       </div>
     </div>

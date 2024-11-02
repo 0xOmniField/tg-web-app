@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import inject from "@rollup/plugin-inject";
+
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import commonjs from "vite-plugin-commonjs";
 
@@ -9,12 +9,7 @@ import commonjs from "vite-plugin-commonjs";
 export default defineConfig({
   plugins: [
     react(),
-    inject({
-      modules: {
-        // 需要时 polyfill 模块
-        Buffer: ["buffer", "Buffer"],
-      },
-    }),
+
     nodePolyfills(), // 使用 Node.js polyfill
     commonjs(),
   ],
@@ -27,7 +22,6 @@ export default defineConfig({
   },
   define: {
     global: "window", // 将 global 定义为 window 对象
-    // "process.env": {}, // 设置 `process.env` 为空对象
   },
   resolve: {
     extensions: [".tsx", ".ts", ".mjs", ".js", ".mts", ".jsx", ".json"],
@@ -36,7 +30,7 @@ export default defineConfig({
       { find: "crypto", replacement: "crypto-browserify" },
       {
         find: "buffer",
-        replacement: resolve(__dirname, "node_modules/buffer/index.js"),
+        replacement: resolve(__dirname, "buffer/"),
       },
       { find: "@app", replacement: resolve(__dirname, "src/app") },
       {

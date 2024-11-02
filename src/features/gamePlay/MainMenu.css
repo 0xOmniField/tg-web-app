@@ -1,6 +1,5 @@
 .main-content-wrapper {
   flex: 1;
-  /* background-image: url("@assets/games/backgrounds/center_bg.png"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,14 +8,6 @@
   font-size: 24px;
   position: relative;
   z-index: 3;
-}
-
-.main-content {
-  /* position: absolute; */
-  /* transform: scale(0.5); */
-  /* right: 0; */
-  /* top: 12px; */
-  /* width: 100%; */
 }
 
 .main-info-container {
