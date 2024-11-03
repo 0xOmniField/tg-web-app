@@ -46,6 +46,7 @@ interface Props {
 const MainMenu = ({ localTimer }: Props) => {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalLeftOpen, setModalLeftOpen] = useState(false);
 
   const discRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -239,7 +240,12 @@ const MainMenu = ({ localTimer }: Props) => {
         <Rocket />
         {!isNotSelectingCreature && (
           <div className="main-content">
-            <div className="main-info-container">
+            <div
+              className="main-info-container"
+              onClick={() => {
+                setModalLeftOpen(true);
+              }}
+            >
               <DiffResourcesInfo
                 diffResources={selectedCreatureDiffResources}
               />
@@ -264,14 +270,18 @@ const MainMenu = ({ localTimer }: Props) => {
           style={{ transform: "translateY(-50%)" }}
         />
       )}
-      <Modal isOpen={modalOpen} onVisibleChange={setModalOpen}>
+      <Modal isOpen={modalOpen} onVisibleChange={setModalOpen} isPart>
         <div>
           {getCircle({
             transform: "scale(1) translate(50%, -50%)",
             top: "150px",
             right: "50%",
           })}
-          {/* <Command /> */}
+        </div>
+      </Modal>
+      <Modal isOpen={modalLeftOpen} onVisibleChange={setModalLeftOpen}>
+        <div>
+          <DiffResourcesInfo diffResources={selectedCreatureDiffResources} />
         </div>
       </Modal>
     </>

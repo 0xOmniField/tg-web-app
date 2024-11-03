@@ -5,16 +5,18 @@ const Modal = ({
   children,
   onVisibleChange,
   style,
+  isPart,
 }: {
   isOpen: boolean;
   children: JSX.Element;
   onVisibleChange: (isOpen: boolean) => void;
   style?: React.CSSProperties | undefined;
+  isPart?: boolean;
 }) => {
   return (
     <>
       <div
-        className={`modal ${isOpen ? "open" : ""}`}
+        className={`modal ${isPart ? "isPart" : ""} ${isOpen ? "open" : ""}`}
         style={style}
         onClick={() => {
           onVisibleChange(false);
