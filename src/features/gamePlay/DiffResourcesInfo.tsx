@@ -1,4 +1,4 @@
-import "./DiffResourcesInfo.css";
+import "./DiffResourcesInfo.less";
 import Grid from "@components/Grid/Grid";
 import DiffResourceDisplay from "./DiffResourceDisplay";
 
