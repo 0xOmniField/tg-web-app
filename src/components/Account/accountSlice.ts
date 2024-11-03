@@ -32,6 +32,7 @@ async function loginL2Account(
   address: string,
   signMessage: SignMessageMutateAsync<unknown>
 ): Promise<{ address: string }> {
+  alert("打开metamask请签名")
   const str: string = await signMessage({ message: address });
   console.log("signed result", str);
   const l2account = new L2AccountInfo(str.substring(0, 34));
