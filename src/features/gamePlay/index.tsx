@@ -11,6 +11,8 @@ import Command from "./Command";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import { SERVER_TICK_TO_SECOND } from "@api/client";
+import PlayButton from "@components/PlayButton";
+import { useDisconnect } from "wagmi";
 
 const GamePlay: React.FC = () => {
   const uIState = useAppSelector(selectUIState);
@@ -24,6 +26,7 @@ const GamePlay: React.FC = () => {
   const animationFrameIdRef = useRef<number | null>(null);
   const elapsedTimeMultiplierRef = useRef<number>(1);
   const lastLocalTimerRef = useRef<number>(globalTimer);
+  const { disconnect } = useDisconnect();
 
   const resetStartTimeRef = () => {
     startTimeRef.current = 0;
@@ -86,7 +89,9 @@ const GamePlay: React.FC = () => {
 
   return (
     <div className="main">
-      <div className="header" />
+      <div className="header">
+        <PlayButton text="Disconnect" onClick={() => disconnect()} />
+      </div>
       <div className="content">
         <LeftMenu localTimer={localTimer} />
         <MainMenu localTimer={localTimer} />
