@@ -12,11 +12,19 @@ const PlayButton = ({ onClick, text }: Props) => {
   return text ? (
     <div className="relative cursor-pointer" onClick={onClick}>
       <div
+        className="
+      sm:absolute
+      text-black
+      font-bold
+      bg-[#D9CFE6]
+      sm:-translate-y-1/2
+      sm:-translate-x-1/2
+      "
         style={{
           textWrap: "nowrap",
-          padding: "10px 23px",
-          clipPath:
-            "polygon(5% 0%, 100% 0%, 100% 10%, 100% 90%, 95% 100%, 10% 100%, 0% 100%, 0% 10%)",
+          padding: "5px 0",
+          // clipPath:
+          //   "polygon(5% 0%, 100% 0%, 100% 10%, 100% 90%, 95% 100%, 10% 100%, 0% 100%, 0% 10%)",
         }}
       >
         {text}
