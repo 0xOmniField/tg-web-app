@@ -13,7 +13,7 @@ export const config = createConfig({
     injected(),
     coinbaseWallet(),
     metaMask(),
-    walletConnect({ projectId: "484d270c55f793db2edd22a4e0ef4b0d" }),
+    walletConnect({ projectId: "7be55d26e898cb78429e8e07aa1b4513" }),
   ],
   transports: {
     [mainnet.id]: http(),
