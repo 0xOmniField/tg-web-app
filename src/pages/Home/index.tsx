@@ -27,8 +27,6 @@ const Home = () => {
   const { connectors, connect } = useConnect();
   const { disconnect } = useDisconnect();
   const l1account = useAppSelector(selectL1Account);
-  const { switchChain } = useSwitchChain();
-
   const connectWallet = useCallback(() => {
     const walletConnectConnector = connectors.find(
       (connector) => connector.id === "walletConnect"
