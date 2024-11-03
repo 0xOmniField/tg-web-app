@@ -17,7 +17,7 @@ import {
   setL1AllAccount,
 } from "@components/Account/accountSlice";
 import PlayButton from "@components/PlayButton";
-import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 import "./index.less";
 
 const Home = () => {
@@ -27,6 +27,7 @@ const Home = () => {
   const { connectors, connect } = useConnect();
   const { disconnect } = useDisconnect();
   const l1account = useAppSelector(selectL1Account);
+
   const connectWallet = useCallback(() => {
     const walletConnectConnector = connectors.find(
       (connector) => connector.id === "walletConnect"
