@@ -2,10 +2,11 @@ import { useCallback, useEffect } from "react";
 import {
   loginL2AccountAsync,
   selectL1Account,
+  selectL2Account,
   setL1AllAccount,
 } from "./accountSlice";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
+import { useAccount, useConnect, useSignMessage, useSwitchChain } from "wagmi";
 import "./index.css";
 import PlayButton from "@components/PlayButton";
 
@@ -13,10 +14,11 @@ const Account: React.FC = () => {
   const account = useAccount();
   const dispatch = useAppDispatch();
   const { connectors, connect } = useConnect();
-  const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   // const [l2Address, setL2Address] = useState("");
   const l1account = useAppSelector(selectL1Account);
+  const l2account = useAppSelector(selectL2Account);
+  const { switchChain } = useSwitchChain();
 
   const connectWallet = useCallback(() => {
     const walletConnectConnector = connectors.find(
@@ -47,31 +49,63 @@ const Account: React.FC = () => {
   ]);
   const connected =
     account && account.chainId && account.status === "connected";
+
+  useEffect(() => {
+    if (l1account !== undefined && !l2account) {
+      if (account.chainId !== 137) {
+        switchChain({ chainId: 137 });
+      } else {
+        dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
+      }
+    }
+  }, [l1account?.address, l2account, account.chainId]);
+
   return (
     <>
-      {!connected ? (
-        <PlayButton onClick={connectWallet} />
-      ) : (
-        // : chain?.unsupported ? (
-        //   <PlayButton
-        //     text={"Wrong network"}
-        //     onClick={() => {
-        //     }}
-        //   />
-        // )
-        <>
-          <PlayButton
-            onClick={() => {
-              if (l1account !== undefined) {
-                dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
-              } else {
-                console.error("L1AccountInfo is undefined");
-              }
-            }}
-          />
-          <PlayButton text="Disconnect" onClick={() => disconnect()} />
-        </>
-      )}
+      <div className="welcome-page-play-button">
+        {!connected ? (
+          <PlayButton onClick={connectWallet} />
+        ) : (
+          <>
+            <PlayButton
+              onClick={() => {
+                if (l1account !== undefined) {
+                  dispatch(
+                    loginL2AccountAsync({ l1account, signMessageAsync })
+                  );
+                } else {
+                  console.error("L1AccountInfo is undefined");
+                }
+              }}
+            />
+          </>
+        )}
+      </div>
+      {account.status === "connecting" ? (
+        <div
+          className="absolute left-0 right-0 top-0 bottom-0 z-50"
+          style={{ background: "rgba(0, 0, 0, 0.8)" }}
+        >
+          <div className="loading-wrapper">
+            <div className="loading" />
+          </div>
+        </div>
+      ) : l1account !== undefined && !l2account ? (
+        <div
+          className="absolute left-0 right-0 top-0 bottom-0 z-50"
+          style={{ background: "rgba(0, 0, 0, 0.8)" }}
+        >
+          <div className="loading-wrapper">
+            <div className="loading" />
+            <div style={{ color: "#fff" }}>
+              {account.chainId !== 137
+                ? "switch chain"
+                : "waiting for signature"}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {/* {<PlayButton text={"Wrong network"} onClick={openChainModal} />} */}
       {/* <div>
         <h2>Account</h2>

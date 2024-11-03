@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import {
   CreatureModel,
@@ -64,6 +64,7 @@ function createLockedCreature(creatureType: number): CreatureModel {
 }
 
 const CREATURE_MAX_COUNT = 24;
+
 function fillCreaturesWithLocked(origin: CreatureModel[]): CreatureModel[] {
   const start = origin.length;
   const end = CREATURE_MAX_COUNT;
@@ -167,14 +168,20 @@ export const selectSelectedCreatureListIndex = (state: RootState) =>
     : state.automata.creatures.selectedCreatureIndex;
 export const selectCreaturesCount = (state: RootState) =>
   state.automata.creatures.creatures.length;
-export const selectCreatures = (state: RootState) =>
-  state.automata.creatures.selectedCreatureIndex ===
-  state.automata.creatures.creatures.length
-    ? fillCreaturesWithLocked([
-        ...state.automata.creatures.creatures,
-        state.automata.creatures.creatingCreature,
-      ])
-    : fillCreaturesWithLocked(state.automata.creatures.creatures);
+
+const selectCreaturesData = (state: RootState) => state.automata.creatures;
+
+export const selectCreatures = createSelector(
+  [selectCreaturesData],
+  (creaturesState) =>
+    creaturesState.selectedCreatureIndex === creaturesState.creatures.length
+      ? fillCreaturesWithLocked([
+          ...creaturesState.creatures,
+          creaturesState.creatingCreature,
+        ])
+      : fillCreaturesWithLocked(creaturesState.creatures)
+);
+
 export const selectSelectedCreature = (state: RootState) =>
   state.automata.creatures.selectedCreatureIndex === NOT_SELECTING_CREATURE
     ? emptyCreature
@@ -306,8 +313,10 @@ export const selectCreaturesCurrentProgressOnCurrentPage =
     );
   };
 
-export const selectCurrentPage = (state: RootState) =>
-  state.automata.creatures.currentPage;
+export const selectCurrentPage = createSelector(
+  [selectCreaturesData],
+  (selectCreaturesData) => selectCreaturesData.currentPage
+);
 
 export const {
   setSelectedCreatureIndex,

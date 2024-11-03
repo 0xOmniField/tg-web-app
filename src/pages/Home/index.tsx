@@ -11,10 +11,52 @@ import {
 } from "../../features/automata/propertiesSlice";
 import GamePlay from "../../features/gamePlay";
 import WelcomePage from "../../components/WelcomePage";
-import { selectL2Account } from "@components/Account/accountSlice";
+import {
+  selectL1Account,
+  selectL2Account,
+  setL1AllAccount,
+} from "@components/Account/accountSlice";
+import PlayButton from "@components/PlayButton";
+import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
+import "./index.less";
 
 const Home = () => {
+  const [show, setShow] = useState(false);
+  const account = useAccount();
   const dispatch = useAppDispatch();
+  const { connectors, connect } = useConnect();
+  const { disconnect } = useDisconnect();
+  const l1account = useAppSelector(selectL1Account);
+  const { switchChain } = useSwitchChain();
+
+  const connectWallet = useCallback(() => {
+    const walletConnectConnector = connectors.find(
+      (connector) => connector.id === "walletConnect"
+    );
+    if (walletConnectConnector) {
+      connect({ connector: walletConnectConnector });
+    }
+  }, [connect, connectors]);
+
+  useEffect(() => {
+    if (!account.isConnected) {
+      connectWallet();
+    } else {
+      dispatch(
+        setL1AllAccount({
+          address: account.address,
+          chainId: account.chainId,
+        })
+      );
+    }
+  }, [
+    account.address,
+    account.chainId,
+    account.isConnected,
+    connectWallet,
+    dispatch,
+  ]);
+
   const nonce = useAppSelector(selectNonce);
   const uIState = useAppSelector(selectUIState);
   const l2account = useAppSelector(selectL2Account);
@@ -104,11 +146,41 @@ const Home = () => {
   //   dispatch(getConfig());
   //   dispatch(queryState({ cmd: [], prikey: "" }));
   // }, []);
-
-  return l2account && uIState >= UIState.Idle ? (
-    <GamePlay />
-  ) : (
-    <WelcomePage progress={progress} message={message} />
+  return (
+    <>
+      <div className="header">
+        <div className="logo" />
+        <div>
+          {account.status === "connected" ? (
+            <div className="relative">
+              <PlayButton
+                text={l1account?.address}
+                onClick={() => {
+                  setShow(!show);
+                }}
+              />
+              <div
+                className="absolute"
+                style={{
+                  top: "52px",
+                  width: "100%",
+                  display: !show ? "none" : "block",
+                }}
+              >
+                <PlayButton text="logout" onClick={() => disconnect()} />
+              </div>
+            </div>
+          ) : (
+            <PlayButton text="login" onClick={connectWallet} />
+          )}
+        </div>
+      </div>
+      {l2account && uIState >= UIState.Idle ? (
+        <GamePlay />
+      ) : (
+        <WelcomePage progress={progress} message={message} />
+      )}
+    </>
   );
   // return <GamePlay />;
 };

@@ -10,9 +10,7 @@ interface Props {
 const WelcomePage = ({ progress, message }: Props) => {
   return (
     <div className="welcome-page-container">
-      <div className="welcome-page-play-button">
-        <Account />
-      </div>
+      <Account />
       {progress > 0 ? (
         <>
           <div className="welcome-page-background-filter"></div>

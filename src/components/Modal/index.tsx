@@ -9,7 +9,7 @@ const Modal = ({
 }: {
   isOpen: boolean;
   children: JSX.Element;
-  onVisibleChange: (isOpen: boolean) => void;
+  onVisibleChange?: (isOpen: boolean) => void;
   style?: React.CSSProperties | undefined;
   isPart?: boolean;
 }) => {
@@ -19,7 +19,7 @@ const Modal = ({
         className={`modal ${isPart ? "isPart" : ""} ${isOpen ? "open" : ""}`}
         style={style}
         onClick={() => {
-          onVisibleChange(false);
+          onVisibleChange?.(false);
         }}
       >
         <div className="modal-content">{children}</div>
