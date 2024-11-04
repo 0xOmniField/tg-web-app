@@ -70,6 +70,7 @@ const Account: React.FC = () => {
             <PlayButton
               onClick={() => {
                 if (l1account !== undefined) {
+                  alert("开始l2签名")
                   dispatch(
                     loginL2AccountAsync({ l1account, signMessageAsync })
                   );
