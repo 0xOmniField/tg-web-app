@@ -2,7 +2,6 @@ import { useCallback, useEffect } from "react";
 import {
   loginL2AccountAsync,
   selectL1Account,
-  selectL2Account,
   setL1AllAccount,
 } from "./accountSlice";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
