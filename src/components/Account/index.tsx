@@ -17,7 +17,7 @@ const Account: React.FC = () => {
   const { signMessageAsync } = useSignMessage();
   // const [l2Address, setL2Address] = useState("");
   const l1account = useAppSelector(selectL1Account);
-  const l2account = useAppSelector(selectL2Account);
+  // const l2account = useAppSelector(selectL2Account);
   const { switchChain } = useSwitchChain();
 
   const connectWallet = useCallback(() => {
