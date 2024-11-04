@@ -90,23 +90,25 @@ const Account: React.FC = () => {
             <div className="loading" />
           </div>
         </div>
-      ) : l1account !== undefined && !l2account ? (
-        <div
-          className="absolute left-0 right-0 top-0 bottom-0 z-50"
-          style={{ background: "rgba(0, 0, 0, 0.8)" }}
-        >
-          <div className="loading-wrapper">
-            <div className="loading" />
-            <div style={{ color: "#fff" }}>
-              {account.chainId !== 137
-                ? "switch chain"
-                : "waiting for signature"}
-            </div>
-          </div>
-        </div>
-      ) : null}
+      ) :
+        /* l1account !== undefined && !l2account ? (
+       <div
+         className="absolute left-0 right-0 top-0 bottom-0 z-50"
+         style={{ background: "rgba(0, 0, 0, 0.8)" }}
+       >
+         <div className="loading-wrapper">
+           <div className="loading" />
+           <div style={{ color: "#fff" }}>
+             {account.chainId !== 137
+               ? "switch chain"
+               : "waiting for signature"}
+           </div>
+         </div>
+       </div>
+     ) */
+           null}
 
-      {/* {<PlayButton text={"Wrong network"} onClick={openChainModal} />} */}
+     {/* {<PlayButton text={"Wrong network"} onClick={openChainModal} />} */}
       {/* <div>
         <h2>Account</h2>
         <div>
