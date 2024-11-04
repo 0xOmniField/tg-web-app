@@ -50,15 +50,15 @@ const Account: React.FC = () => {
   const connected =
     account && account.chainId && account.status === "connected";
 
-  useEffect(() => {
-    if (l1account !== undefined && !l2account) {
-      if (account.chainId !== 137) {
-        switchChain({ chainId: 137 });
-      } else {
-        dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
-      }
-    }
-  }, [l1account?.address, l2account, account.chainId]);
+  // useEffect(() => {
+  //   if (l1account !== undefined && !l2account) {
+  //     if (account.chainId !== 137) {
+  //       switchChain({ chainId: 137 });
+  //     } else {
+  //       dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
+  //     }
+  //   }
+  // }, [l1account?.address, l2account, account.chainId]);
 
   return (
     <>
@@ -70,10 +70,11 @@ const Account: React.FC = () => {
             <PlayButton
               onClick={() => {
                 if (l1account !== undefined) {
-                  alert("开始l2签名")
-                  dispatch(
-                    loginL2AccountAsync({ l1account, signMessageAsync })
-                  );
+                  if (account.chainId !== 137) {
+                    switchChain({ chainId: 137 });
+                  } else {
+                    dispatch(loginL2AccountAsync({ l1account, signMessageAsync }));
+                  }
                 } else {
                   console.error("L1AccountInfo is undefined");
                 }
