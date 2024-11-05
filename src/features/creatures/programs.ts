@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import {
   ProgramModel,
@@ -69,28 +69,34 @@ export const programsSlice = createSlice({
   },
 });
 
+const baseProgramsCurrentPage = (state: RootState) =>
+  state.automata.programs.currentPage;
 export const selectProgramsOnCurrentPage =
-  (programs: ProgramModel[]) =>
-  (amountPerPage: number) =>
-  (state: RootState) => {
-    const startIndex = state.automata.programs.currentPage * amountPerPage;
-    const endIndex = startIndex + amountPerPage;
-    return programs.slice(startIndex, endIndex);
-  };
+  (programs: ProgramModel[]) => (amountPerPage: number) =>
+    createSelector([baseProgramsCurrentPage], (baseProgramsCurrentPage) => {
+      const startIndex = baseProgramsCurrentPage * amountPerPage;
+      const endIndex = startIndex + amountPerPage;
+      return programs.slice(startIndex, endIndex);
+    });
 
 export const selectAllPrograms = (state: RootState) =>
   state.automata.programs.programs;
 
-export const selectFilteredPrograms = (state: RootState) =>
-  state.automata.programs.programs.filter(
-    (program) =>
-      selectIsAllResourcesToggled(state) ||
-      allResourceTypes.every(
-        (type) =>
-          !selectIsResourceTypeToggled(type)(state) ||
-          program.resources.some((resource) => resource.type === type)
-      )
-  );
+export const selectState = (state: RootState) => state;
+
+export const selectFilteredPrograms = createSelector(
+  [selectAllPrograms, selectState],
+  (selectAllPrograms, selectState) =>
+    selectAllPrograms.filter(
+      (program) =>
+        selectIsAllResourcesToggled(selectState) ||
+        allResourceTypes.every(
+          (type) =>
+            !selectIsResourceTypeToggled(type)(selectState) ||
+            program.resources.some((resource) => resource.type === type)
+        )
+    )
+);
 
 export const selectProgramsByIndexes =
   (indexes: (number | null)[]) => (state: RootState) =>

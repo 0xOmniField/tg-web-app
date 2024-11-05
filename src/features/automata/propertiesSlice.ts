@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@app/store";
 import { getConfig, sendTransaction, queryState } from "@api/client";
 import { ResourceAmountPair } from "@features/creatures/models";
@@ -77,22 +77,40 @@ export const propertiesSlice = createSlice({
       });
   },
 });
+export const automataProperties = (state: RootState) =>
+  state.automata.properties;
 
-export const selectIsLoading = (state: RootState) =>
-  state.automata.properties.uIState == UIState.Loading;
-export const selectIsSelectingUIState = (state: RootState) =>
-  state.automata.properties.uIState == UIState.Creating ||
-  state.automata.properties.uIState == UIState.Reboot;
-export const selectUIState = (state: RootState) =>
-  state.automata.properties.uIState;
-export const selectGlobalTimer = (state: RootState) =>
-  state.automata.properties.globalTimer;
-export const selectNonce = (state: RootState) => {
-  return BigInt(state.automata.properties.nonce);
-};
+export const selectIsLoading = createSelector(
+  [automataProperties],
+  (automataProperties) => automataProperties.uIState == UIState.Loading
+);
+export const selectIsSelectingUIState = createSelector(
+  [automataProperties],
+  (automataProperties) =>
+    automataProperties.uIState == UIState.Creating ||
+    automataProperties.uIState == UIState.Reboot
+);
 
-export const selectHasRocket = (state: RootState) =>
-  state.automata.properties.hasRocket;
+export const selectUIState = createSelector(
+  [automataProperties],
+  (automataProperties) => automataProperties.uIState
+);
+
+export const selectGlobalTimer = createSelector(
+  [automataProperties],
+  (automataProperties) => automataProperties.globalTimer
+);
+export const selectNonce = createSelector(
+  [automataProperties],
+  (automataProperties) => {
+    return BigInt(automataProperties.nonce);
+  }
+);
+
+export const selectHasRocket = createSelector(
+  [automataProperties],
+  (automataProperties) => automataProperties.hasRocket
+);
 
 export const { setUIState, setHasRocket } = propertiesSlice.actions;
 export default propertiesSlice.reducer;
