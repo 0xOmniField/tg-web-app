@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
 import "./MainMenu.css";
@@ -47,6 +47,7 @@ const MainMenu = ({ localTimer }: Props) => {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalLeftOpen, setModalLeftOpen] = useState(false);
+  const [animationData, setAnimationData] = useState<Record<string, any>>({});
 
   const discRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -178,6 +179,22 @@ const MainMenu = ({ localTimer }: Props) => {
 
   const creatureIconPath = getCreatureIconPath(selectedCreature.creatureType);
 
+  useEffect(() => {
+    const rolePath = `${creatureIconPath.role}`;
+    if (!animationData?.[rolePath]) {
+      fetch(creatureIconPath.role)
+        .then((response) => response.json())
+        .then((data) =>
+          setAnimationData((prev) => {
+            return {
+              ...prev,
+              [rolePath]: data,
+            };
+          })
+        );
+    }
+  }, [creatureIconPath.role]);
+
   const getCircle = (style?: any) => {
     return (
       <div className="main-circle-container" style={style}>
@@ -234,6 +251,9 @@ const MainMenu = ({ localTimer }: Props) => {
     );
   };
 
+  const data = useMemo(() => {
+    return animationData?.[`${creatureIconPath.role}`];
+  }, [animationData, creatureIconPath.role]);
   return (
     <>
       <div className="main-content-wrapper">
@@ -255,18 +275,13 @@ const MainMenu = ({ localTimer }: Props) => {
         )}
       </div>
       {creatureIconPath.background && (
-        // <Lottie
-        //   animationData={creatureIconPath.background}
-        //   loop={true}
-        //   className="absolute z-0"
-        // />
         <img src={creatureIconPath.background} className="absolute z-0" />
       )}
 
-      {creatureIconPath.role && (
+      {creatureIconPath.role && data && (
         <Lottie
           lottieRef={lottieRef}
-          animationData={creatureIconPath.role}
+          animationData={data}
           className="absolute top-1/2"
           style={{ transform: "translateY(-50%)" }}
         />

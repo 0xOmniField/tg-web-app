@@ -20,10 +20,10 @@ import Bot1Background from "@assets/games/Animations/background/1.png";
 import Bot2Background from "@assets/games/Animations/background/2.png";
 import Bot3Background from "@assets/games/Animations/background/3.png";
 import Bot4Background from "@assets/games/Animations/background/4.png";
-import Bot1RoleAnimation from "@assets/games/Animations/role/1.json";
-import Bot2RoleAnimation from "@assets/games/Animations/role/2.json";
-import Bot3RoleAnimation from "@assets/games/Animations/role/3.json";
-import Bot4RoleAnimation from "@assets/games/Animations/role/4.json";
+// import Bot1RoleAnimation from "@assets/games/Animations/role/1.json";
+// import Bot2RoleAnimation from "@assets/games/Animations/role/2.json";
+// import Bot3RoleAnimation from "@assets/games/Animations/role/3.json";
+// import Bot4RoleAnimation from "@assets/games/Animations/role/4.json";
 import BioGen from "@assets/games/Animations/Programs/BioGen.png";
 import CrysTara from "@assets/games/Animations/Programs/CrysTara.png";
 import AstroMine from "@assets/games/Animations/Programs/AstroMine.png";
@@ -451,22 +451,26 @@ const botIconPaths = [
   {
     bot: Bot1,
     background: Bot1Background,
-    role: Bot1RoleAnimation,
+    role: "/role/1.json",
+    // role: Bot1RoleAnimation,
   },
   {
     bot: Bot2,
     background: Bot2Background,
-    role: Bot2RoleAnimation,
+    role: "/role/2.json",
+    // role: Bot2RoleAnimation,
   },
   {
     bot: Bot3,
     background: Bot3Background,
-    role: Bot3RoleAnimation,
+    role: "/role/3.json",
+    // role: Bot3RoleAnimation,
   },
   {
     bot: Bot4,
     background: Bot4Background,
-    role: Bot4RoleAnimation,
+    role: "/role/4.json",
+    // role: Bot4RoleAnimation,
   },
 ];
 
