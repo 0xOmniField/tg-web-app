@@ -27,7 +27,8 @@ const MainMenuProgram = ({ order, program, showingAnimation }: Props) => {
   const radius = 30;
   const yPosition = 50 - Math.sin((angle * Math.PI) / 180) * radius;
   const xPosition = 50 + Math.cos((angle * Math.PI) / 180) * radius;
-  const onClick = () => {
+  const onClick = (e: any) => {
+    e.stopPropagation();
     if (isSelectingUIState && !isLoading) {
       dispatch(setSelectingProgramIndex({ selectingIndex: order }));
     }

@@ -7,7 +7,7 @@ interface Props {
   hoverImagePath: string;
   clickedImagePath: string;
   disabledImagePath: string;
-  onClick: () => void;
+  onClick: (e: any) => void;
   style?: React.CSSProperties | undefined;
 }
 
@@ -29,10 +29,10 @@ const ImageButton = ({
     }
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: any) => {
     if (!isDisabled) {
       setIsClicked(false);
-      onClick();
+      onClick(e);
     }
   };
 
@@ -57,6 +57,7 @@ const ImageButton = ({
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
       disabled={isDisabled}
+      onClick={handleMouseUp}
     >
       <img
         style={style}

@@ -5,7 +5,7 @@ import rebootButtonClickImage from "@assets/games/Buttons/Reboot/reboot_click.pn
 import "./RebootButton.css";
 
 interface Props {
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 
 const RebootButton = ({ onClick }: Props) => {

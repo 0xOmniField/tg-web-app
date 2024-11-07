@@ -6,7 +6,7 @@ import "./UnlockButton.css";
 
 interface Props {
   isDisabled: boolean;
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 
 const UnlockButton = ({ isDisabled, onClick }: Props) => {
