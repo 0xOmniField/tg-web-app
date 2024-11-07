@@ -4,7 +4,7 @@ import { resolve } from "path";
 
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import commonjs from "vite-plugin-commonjs";
-
+const staticDir = "assets";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -21,6 +21,25 @@ export default defineConfig({
   },
   define: {
     global: "window", // 将 global 定义为 window 对象
+  },
+  build: {
+    sourcemap: true,
+    target: ["chrome120", "firefox120", "safari16", "edge120"],
+    commonjsOptions: {
+      ignoreTryCatch: false,
+    },
+    outDir: "dist",
+    assetsDir: staticDir,
+    copyPublicDir: true,
+    reportCompressedSize: true, // gzip压缩大小报告
+    chunkSizeWarningLimit: 10, // 单位为KB,
+    rollupOptions: {
+      output: {
+        chunkFileNames: `${staticDir}/js/[name]-[hash].js`,
+        entryFileNames: `${staticDir}/js/[name]-[hash].js`,
+        assetFileNames: `${staticDir}/[ext]/[name]-[hash].[ext]`,
+      },
+    },
   },
   resolve: {
     extensions: [".tsx", ".ts", ".mjs", ".js", ".mts", ".jsx", ".json"],
