@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "@app/hooks";
 import { getConfig, sendTransaction, queryState } from "@api/client";
 import { getInsPlayerTransactionCommandArray } from "@api/rpc";
@@ -8,14 +8,14 @@ import {
   selectUIState,
   setUIState,
   selectNonce,
-} from "../../features/automata/propertiesSlice";
-import GamePlay from "../../features/gamePlay";
-import WelcomePage from "../../components/WelcomePage";
+} from "@features/automata/propertiesSlice";
 import {
   selectL1Account,
   selectL2Account,
   setL1AllAccount,
 } from "@components/Account/accountSlice";
+const GamePlay = lazy(() => import("@features/gamePlay"));
+const WelcomePage = lazy(() => import("@components/WelcomePage"));
 import PlayButton from "@components/PlayButton";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import "./index.less";
@@ -141,10 +141,10 @@ const Home = () => {
       });
     }
   }, [dispatch, l2account, uIState]);
-  // useEffect(() => {
-  //   dispatch(getConfig());
-  //   dispatch(queryState({ cmd: [], prikey: "" }));
-  // }, []);
+  useEffect(() => {
+    dispatch(getConfig());
+    dispatch(queryState({ cmd: [], prikey: "" }));
+  }, []);
   return (
     <>
       <div className="header">
@@ -174,14 +174,16 @@ const Home = () => {
           )}
         </div>
       </div>
-      {l2account && uIState >= UIState.Idle ? (
-        <GamePlay />
-      ) : (
-        <WelcomePage progress={progress} message={message} />
-      )}
+      <Suspense fallback={<div></div>}>
+        {l2account && uIState >= UIState.Idle ? (
+          <GamePlay />
+        ) : (
+          <WelcomePage progress={progress} message={message} />
+        )}
+      </Suspense>
+      {/* <GamePlay /> */}
     </>
   );
-  // return <GamePlay />;
 };
 
 export default Home;

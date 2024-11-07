@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-
+// import { visualizer } from "rollup-plugin-visualizer";
+// import { viteStaticCopy } from "vite-plugin-static-copy";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import commonjs from "vite-plugin-commonjs";
 const staticDir = "assets";
@@ -11,6 +12,20 @@ export default defineConfig({
     react(),
     nodePolyfills(), // 使用 Node.js polyfill
     commonjs(),
+    // viteStaticCopy({
+    //   targets: [
+    //     {
+    //       src: "src/assets/games/Animations/role/*.json",
+    //       dest: "assets/games/Animations/role",
+    //     },
+    //   ],
+    // }),
+    // visualizer({
+    //   open: true,
+    //   gzipSize: true,
+    //   brotliSize: true,
+    //   filename: "stat.html",
+    // }),
   ],
   css: {
     preprocessorOptions: {
