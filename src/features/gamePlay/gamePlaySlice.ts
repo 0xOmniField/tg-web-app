@@ -1,51 +1,103 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "@app/store";
+import { BNToUint8Array } from "@utils/proof";
+// import sha256 from "sha256";
+// import BN from "bn.js";
+// import { bnToHexLe } from "delphinus-curves/src/altjubjub";
 
-// 定义 slice 的 state 类型
-interface CounterState {
-  value: number;
-  status: "idle" | "loading" | "succeeded" | "failed";
+export interface GameState {
+  loaded: boolean;
+  readyToSubmit: boolean;
+  md5: string | null;
+  preMerkleRoot: Array<bigint>;
+  postMerkleRoot: Array<bigint>;
+  msgHash: string; //start with 0x little end
+  commands: Array<bigint>;
 }
 
-// 定义初始状态
-const initialState: CounterState = {
-  value: 0,
-  status: "idle",
+const initialState: GameState = {
+  loaded: false,
+  readyToSubmit: false,
+  md5: null,
+  preMerkleRoot: [0n, 0n, 0n, 0n],
+  postMerkleRoot: [0n, 0n, 0n, 0n],
+  commands: [],
+  msgHash: "0x0", //
 };
-export const fetchData = createAsyncThunk("counter/fetchData", async () => {
-  const response = await fetch("https://api.example.com/data");
-  return response.json();
-});
 
-// 创建 slice
-const counterSlice = createSlice({
-  name: "counter",
+export const getMerkleRoot = createAsyncThunk(
+  "game/getMerkleRoot",
+  async () => {
+    //let l2account = await loginL2Account(l1account.address);
+    return [0, 0, 0, 0];
+  }
+);
+
+// function hashMessage(msg: Uint8Array): string {
+//   const hash = sha256(Buffer.from(msg));
+//   const bn = new BN(hash, "hex");
+//   return bnToHexLe(bn);
+// }
+
+export const gameSlice = createSlice({
+  name: "game",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    setLoaded: (state, loaded) => {
+      state.loaded = loaded.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    setMD5: (state, loaded) => {
+      state.md5 = loaded.payload;
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+
+    setReadyToSubmit: (state, loaded) => {
+      state.readyToSubmit = loaded.payload;
     },
+    setPreMerkleRoot: (state, loaded) => {
+      state.preMerkleRoot = loaded.payload;
+    },
+    setPostMerkleRoot: (state, loaded) => {
+      state.preMerkleRoot = loaded.payload;
+    },
+
+    // appendCommand: (state, command) => {
+    //   console.log("command loaded");
+    //   state.commands.push(command.payload);
+    //   const buf = new Uint8Array(state.commands.length * 8);
+    //   state.commands.map((v, i) => {
+    //     buf.set(BNToUint8Array(v), 8 * i);
+    //   });
+    //   state.msgHash = hashMessage(buf);
+    // },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, (state) => {
-        state.status = "loading"; // 异步请求正在进行
+      .addCase(getMerkleRoot.pending, () => {
+        console.log("getMerkleRoot pending");
       })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.status = "succeeded"; // 异步请求成功
-        state.value = action.payload; // 将返回的数据保存到 state 中
-      })
-      .addCase(fetchData.rejected, (state) => {
-        state.status = "failed"; // 异步请求失败
+      .addCase(getMerkleRoot.fulfilled, () => {
+        console.log("getMerkleRoot fulfilled");
       });
   },
 });
 
-// 导出 actions 和 reducer
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export default counterSlice.reducer;
+export const selectGameLoaded = (state: RootState) => state.game.loaded;
+export const selectMD5 = (state: RootState) => state.game.md5;
+export const selectReadyToSubmit = (state: RootState) =>
+  state.game.readyToSubmit;
+export const selectCommands = (state: RootState) => state.game.commands;
+export const selectPreMerkleRoot = (state: RootState) =>
+  state.game.preMerkleRoot;
+export const selectPostMerkleRoot = (state: RootState) =>
+  state.game.postMerkleRoot;
+export const selectMsgHash = (state: RootState) => state.game.msgHash;
+export const { setLoaded, setReadyToSubmit, setMD5 } = gameSlice.actions;
+export const selectMessageToSigned = (state: RootState) => {
+  const buf = new Uint8Array(state.game.commands.length * 8);
+  state.game.commands.map((v, i) => {
+    buf.set(BNToUint8Array(v), 8 * i);
+  });
+  console.log(buf);
+  return buf;
+};
+export default gameSlice.reducer;

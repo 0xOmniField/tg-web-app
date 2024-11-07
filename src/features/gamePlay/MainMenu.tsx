@@ -255,11 +255,12 @@ const MainMenu = ({ localTimer }: Props) => {
         )}
       </div>
       {creatureIconPath.background && (
-        <Lottie
-          animationData={creatureIconPath.background}
-          loop={true}
-          className="absolute z-0"
-        />
+        // <Lottie
+        //   animationData={creatureIconPath.background}
+        //   loop={true}
+        //   className="absolute z-0"
+        // />
+        <img src={creatureIconPath.background} className="absolute z-0" />
       )}
 
       {creatureIconPath.role && (

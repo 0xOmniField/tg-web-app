@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "@app/store";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { SignMessageMutateAsync } from "wagmi/query";
 
 export interface L1AccountInfo {
@@ -89,12 +94,22 @@ export const accountSlice = createSlice({
       });
   },
 });
+export const account = (state: RootState) => state.account;
+
 export const { setL1AllAccount } = accountSlice.actions;
-export const selectL1Account = <T extends State>(state: T) =>
-  state.account.l1account;
-export const selectL2Account = <T extends State>(state: T) =>
-  state.account.l2account;
-export const selectLoginStatus = <T extends State>(state: T) =>
-  state.account.status;
+
+export const selectL1Account = createSelector(
+  [account],
+  (account) => account.l1account
+);
+export const selectL2Account = createSelector(
+  [account],
+  (account) => account.l2account
+);
+
+export const selectLoginStatus = createSelector(
+  [account],
+  (account) => account.status
+);
 
 export default accountSlice.reducer;
