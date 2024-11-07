@@ -153,8 +153,6 @@ const mapBg = {
   QuantumSurge,
 };
 
-import { useEffect, useState } from "react";
-
 export interface CreatureModel {
   rareResources: ResourceAmountPair[];
   name: string;
