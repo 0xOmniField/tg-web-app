@@ -6,7 +6,7 @@ import "./ConfirmButton.css";
 
 interface Props {
   isDisabled: boolean;
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 
 const ConfirmButton = ({ isDisabled, onClick }: Props) => {

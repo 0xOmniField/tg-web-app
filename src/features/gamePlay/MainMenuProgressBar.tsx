@@ -9,7 +9,7 @@ interface Props {
   iconPath: string;
   isCreating: boolean;
   showAnimation: boolean;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }
 
 const MainMenuProgressBar = ({

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo, memo } from "react";
 import MainMenuSelectingFrame from "./MainMenuSelectingFrame";
 import MainMenuProgram from "./MainMenuProgram";
 import "./MainMenu.css";
@@ -43,7 +43,7 @@ interface Props {
   localTimer: number;
 }
 
-const MainMenu = ({ localTimer }: Props) => {
+const MainMenu = memo(({ localTimer }: Props) => {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalLeftOpen, setModalLeftOpen] = useState(false);
@@ -79,17 +79,19 @@ const MainMenu = ({ localTimer }: Props) => {
   );
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
 
-  function onClickUnlock() {
+  function onClickUnlock(e: any) {
+    e.stopPropagation();
     if (uIState == UIState.Creating) {
       setShowUnlockAnimation(true);
       setTimeout(() => {
         setShowUnlockAnimation(false);
-        onClickConfirm();
+        onClickConfirm(e);
       }, 1000);
     }
   }
 
-  function onClickConfirm() {
+  function onClickConfirm(e: any) {
+    e.stopPropagation();
     if (!isLoading) {
       // bugs here, after creating a new creature, the list will refresh unproperly.
       // fix it after UI done polishing creature list since it may change the layout of the creating creature.
@@ -125,7 +127,8 @@ const MainMenu = ({ localTimer }: Props) => {
     }
   }
 
-  function onClickReboot() {
+  function onClickReboot(e: any) {
+    e.stopPropagation();
     if (!isLoading) {
       dispatch(setUIState({ uIState: UIState.Reboot }));
       dispatch(startRebootCreature());
@@ -212,8 +215,8 @@ const MainMenu = ({ localTimer }: Props) => {
           iconPath={creatureIconPath.bot}
           isCreating={isCreatingUIState}
           showAnimation={showUnlockAnimation}
-          onClick={() => {
-            setModalOpen(true);
+          onClick={(e: any) => {
+            e.stopPropagation();
           }}
         />
         <div className="main-circle-background"></div>
@@ -237,16 +240,16 @@ const MainMenu = ({ localTimer }: Props) => {
         {showConfirmButton && (
           <ConfirmButton
             isDisabled={!enableConfirmButton}
-            onClick={() => onClickConfirm()}
+            onClick={onClickConfirm}
           />
         )}
         {showUnlockButton && (
           <UnlockButton
             isDisabled={!enableUnlockButton}
-            onClick={() => onClickUnlock()}
+            onClick={onClickUnlock}
           />
         )}
-        {showRebootButton && <RebootButton onClick={() => onClickReboot()} />}
+        {showRebootButton && <RebootButton onClick={onClickReboot} />}
       </div>
     );
   };
@@ -271,6 +274,12 @@ const MainMenu = ({ localTimer }: Props) => {
               />
             </div>
             {getCircle()}
+            <div
+              className="main-circle-container-wrapper"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            />
           </div>
         )}
       </div>
@@ -302,6 +311,6 @@ const MainMenu = ({ localTimer }: Props) => {
       </Modal>
     </>
   );
-};
+});
 
 export default MainMenu;
