@@ -1,13 +1,13 @@
 import currentFrame from "@assets/games/MainMenu/selecting_frame.png";
 import currentFrameStop from "@assets/games/MainMenu/selecting_frame_red.png";
-import selectingFrame1 from "@assets/games/MainMenu/select1.png";
-import selectingFrame2 from "@assets/games/MainMenu/select2.png";
-import selectingFrame3 from "@assets/games/MainMenu/select3.png";
-import selectingFrame4 from "@assets/games/MainMenu/select4.png";
-import selectingFrame5 from "@assets/games/MainMenu/select5.png";
-import selectingFrame6 from "@assets/games/MainMenu/select6.png";
-import selectingFrame7 from "@assets/games/MainMenu/select7.png";
-import selectingFrame8 from "@assets/games/MainMenu/select8.png";
+// import selectingFrame1 from "@assets/games/MainMenu/select1.png";
+// import selectingFrame2 from "@assets/games/MainMenu/select2.png";
+// import selectingFrame3 from "@assets/games/MainMenu/select3.png";
+// import selectingFrame4 from "@assets/games/MainMenu/select4.png";
+// import selectingFrame5 from "@assets/games/MainMenu/select5.png";
+// import selectingFrame6 from "@assets/games/MainMenu/select6.png";
+// import selectingFrame7 from "@assets/games/MainMenu/select7.png";
+// import selectingFrame8 from "@assets/games/MainMenu/select8.png";
 
 import "./MainMenuSelectingFrame.css";
 import React from "react";
@@ -18,21 +18,21 @@ interface Props {
   isStop: boolean;
 }
 
-function getSelectingFrameDiv(order: number) {
-  const selectingFrames = [
-    selectingFrame1,
-    selectingFrame2,
-    selectingFrame3,
-    selectingFrame4,
-    selectingFrame5,
-    selectingFrame6,
-    selectingFrame7,
-    selectingFrame8,
-  ];
-  return (
-    <img src={selectingFrames[order]} className="main-selecting-frame-image" />
-  );
-}
+// function getSelectingFrameDiv(order: number) {
+//   const selectingFrames = [
+//     selectingFrame1,
+//     selectingFrame2,
+//     selectingFrame3,
+//     selectingFrame4,
+//     selectingFrame5,
+//     selectingFrame6,
+//     selectingFrame7,
+//     selectingFrame8,
+//   ];
+//   return (
+//     <img src={selectingFrames[order]} className="main-selecting-frame-image" />
+//   );
+// }
 
 const MainMenuSelectingFrame = ({ order, isCurrentProgram, isStop }: Props) => {
   if (order == null) {
