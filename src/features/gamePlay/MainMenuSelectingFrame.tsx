@@ -68,17 +68,17 @@ const MainMenuSelectingFrame = ({ order, isCurrentProgram, isStop }: Props) => {
     );
   };
 
-  const selectingFrameDiv = () => {
-    return (
-      <div className="main-selecting-frame-container">
-        {getSelectingFrameDiv(order)}
-      </div>
-    );
-  };
+  // const selectingFrameDiv = () => {
+  //   return (
+  //     <div className="main-selecting-frame-container">
+  //       {getSelectingFrameDiv(order)}
+  //     </div>
+  //   );
+  // };
 
   return (
     <React.Fragment key={isCurrentProgram ? "current" : "selecting"}>
-      {isCurrentProgram ? currentFrameDiv() : selectingFrameDiv()}
+      {isCurrentProgram ? currentFrameDiv() : currentFrameDiv()}
     </React.Fragment>
   );
 };
