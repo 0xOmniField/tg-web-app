@@ -40,7 +40,6 @@ const ProgramFilterBar = memo(() => {
     dispatch(toggleFilter({ type: type }));
   };
   const allSelect = useAppSelector(selectIsAllResourcesToggled);
-  console.log("ProgramFilterBar");
   return (
     <div className="program-filter-bar-container">
       <div className="program-filter-bar-filters-container">
