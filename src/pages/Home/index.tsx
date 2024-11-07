@@ -141,10 +141,10 @@ const Home = () => {
       });
     }
   }, [dispatch, l2account, uIState]);
-  useEffect(() => {
-    dispatch(getConfig());
-    dispatch(queryState({ cmd: [], prikey: "" }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getConfig());
+  //   dispatch(queryState({ cmd: [], prikey: "" }));
+  // }, []);
   return (
     <>
       <div className="header">
