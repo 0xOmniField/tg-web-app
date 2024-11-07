@@ -1,5 +1,5 @@
 import "./Command.less";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import Program from "@components/Games/Program";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import {
@@ -19,7 +19,7 @@ import PrevPageButton from "@components/PrevPageButton";
 import NextPageButton from "@components/NextPageButton";
 import ProgramFilterBar from "@components/Games/ProgramFilterBar/ProgramFilterBar";
 
-const Command: React.FC = () => {
+const Command = memo(() => {
   const dispatch = useAppDispatch();
   const [programGridWidth, setProgramGridWidth] = useState(0);
   const programGridRef = useRef<HTMLInputElement>(null);
@@ -116,6 +116,6 @@ const Command: React.FC = () => {
       />
     </div>
   );
-};
+});
 
 export default Command;

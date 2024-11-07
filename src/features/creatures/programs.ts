@@ -114,8 +114,10 @@ export const selectProgramByIndex =
     index < state.automata.programs.programs.length
       ? state.automata.programs.programs[index]
       : null;
+
 export const selectIsAllResourcesToggled = (state: RootState) =>
   Object.values(state.automata.programs.filter.dict).every((toggle) => !toggle);
+
 export const selectIsResourceTypeToggled =
   (type: ResourceType) => (state: RootState) =>
     state.automata.programs.filter.dict[type] ?? false;
